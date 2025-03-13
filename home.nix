@@ -23,7 +23,7 @@ in {
     pkgs.vim
     pkgs.git
     pkgs.gh
-    pkgs-staging.go_1_24
+    pkgs-unstable.go_1_24
     pkgs-unstable.rustc
     pkgs-unstable.cargo
     pkgs.gnumake
@@ -46,12 +46,14 @@ in {
     (config.lib.nixGL.wrap pkgs.wl-mirror)
     (config.lib.nixGL.wrap pkgs-unstable.ghostty)
 
+    (config.lib.nixGL.wrap pkgs.standardnotes)
     (config.lib.nixGL.wrap pkgs.spotify)
     (config.lib.nixGL.wrap pkgs-unstable.element-desktop)
     (config.lib.nixGL.wrap pkgs-unstable._1password-gui)
     pkgs-unstable._1password-cli
 
     pkgs.podman
+    pkgs.podman-compose
     pkgs.skopeo
     pkgs.minikube
     pkgs.kubectl

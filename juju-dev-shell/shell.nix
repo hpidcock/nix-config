@@ -8,7 +8,7 @@ let
   };
   packages = with pkgs; [
     zsh
-    (pkgs-staging.go_1_24)
+    (pkgs-unstable.go_1_24)
     yq-go
     jq
     gnumake
