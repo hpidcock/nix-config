@@ -34,10 +34,12 @@
       pkgs-24-05 = import nixpkgs-24-05 {
         system = system;
         config = { allowUnfree = true; };
+        overlays = [ nixgl.overlay ];
       };
       pkgs-staging = import nixpkgs-staging {
         system = system;
         config = { allowUnfree = true; };
+        overlays = [ nixgl.overlay ];
       };
     in {
       homeConfigurations.hpidcock = home-manager.lib.homeManagerConfiguration {

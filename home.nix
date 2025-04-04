@@ -46,6 +46,9 @@ in {
     (config.lib.nixGL.wrap pkgs.wl-mirror)
     (config.lib.nixGL.wrap pkgs-unstable.ghostty)
 
+    (config.lib.nixGL.wrap pkgs.firefox)
+    (config.lib.nixGL.wrap pkgs.brave)
+    (config.lib.nixGL.wrap pkgs.ungoogled-chromium)
     (config.lib.nixGL.wrap pkgs.standardnotes)
     (config.lib.nixGL.wrap pkgs.spotify)
     (config.lib.nixGL.wrap pkgs-unstable.element-desktop)
@@ -64,7 +67,7 @@ in {
     pkgs.wineWowPackages.stable
     pkgs.winetricks
 
-    pkgs.ollama-rocm
+    pkgs-unstable.ollama-rocm
 
     zed-editor
     jdev
@@ -73,10 +76,6 @@ in {
       lib = lib;
       jdev = jdev;
       zed-editor = zed-editor;
-    })
-    (import ./firefox-snap.nix {
-      pkgs = pkgs;
-      lib = lib;
     })
   ];
 
