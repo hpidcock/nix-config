@@ -201,6 +201,7 @@ in {
     enable = true;
     package = pkgs.apple-cursor;
     name = "macOS";
+    gtk.enable = true;
   };
 
   wayland.windowManager.sway = {
