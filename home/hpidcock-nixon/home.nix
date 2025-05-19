@@ -10,6 +10,8 @@ in {
     pkgs.htop
     pkgs.wget
     pkgs.curl
+    pkgs.gnupg
+    pkgs.pinentry-rofi
 
     pkgs.nixd
     pkgs.nil
@@ -37,6 +39,14 @@ in {
     PATH = "/home/hpidcock/go/bin:$PATH";
   };
   home.language = { base = "en_AU.utf8"; };
+
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
+    pinentryPackage = pkgs.pinentry-rofi;
+  };
+
   programs.git = {
     enable = true;
     userName = "Harry Pidcock";
