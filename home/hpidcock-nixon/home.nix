@@ -213,7 +213,7 @@ in {
       # is used in the bar {} block below.
       font pango:Noto 0.001
 
-      xcursor_theme = macOS 32
+      seat seat0 xcursor_theme macOS 32
 
       set $mod Mod4
 
