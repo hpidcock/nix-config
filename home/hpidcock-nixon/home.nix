@@ -58,6 +58,7 @@ in {
       "git+ssh://git.launchpad.net/" = { insteadOf = "lp:"; };
       "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
     };
+    extraConfig.safe.directory = "/etc/nixos";
   };
 
   programs.alacritty = {
