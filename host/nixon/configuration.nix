@@ -60,6 +60,13 @@
   };
 
   environment.systemPackages = with pkgs; [ vim wget ];
+  system.userActivationScripts = {
+    home-manager-symlink = {
+      text = ''
+        test -h $HOME/.config/home-manager || (mkdir -p $HOME/.config && ln -s /etc/nixos $HOME/.config/home-manager)
+      '';
+    };
+  };
 
   programs.steam = {
     enable = true;
