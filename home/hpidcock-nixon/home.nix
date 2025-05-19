@@ -197,6 +197,12 @@ in {
     '';
   };
 
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.apple-cursor;
+    name = "macOS";
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
@@ -206,6 +212,8 @@ in {
       # Font for window titles. Will also be used by the bar unless a different font
       # is used in the bar {} block below.
       font pango:Noto 0.001
+
+      xcursor_theme = macOS 32
 
       set $mod Mod4
 
