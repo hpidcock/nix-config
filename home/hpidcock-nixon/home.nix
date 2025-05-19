@@ -27,7 +27,6 @@ in {
     pkgs.powerline-fonts
 
     pkgs.firefox
-    pkgs.brave
     pkgs.standardnotes
     pkgs.spotify
     pkgs._1password-gui
@@ -120,22 +119,22 @@ in {
   programs.zsh = {
     enable = true;
     initExtraFirst = ''
-              zvm_config() {
-                ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLOCK
-                ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
-              }
-              function modver() {
-      	  TZ=UTC git --no-pager show \
-      	  --quiet \
-      	  --abbrev=12 \
-      	  --date='format-local:%Y%m%d%H%M%S' \
-      	  --format="%cd-%h"
-      	}
-      	alias modver=modver
-      	function juju_kill_controllers() {
-      	  juju controllers --format=yaml | yq '.controllers | keys | .[]' | xargs -n 1 juju kill-controller --no-prompt --timeout 0s
-      	}
-      	alias juju-kill-controllers=juju_kill_controllers
+      zvm_config() {
+        ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+        ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
+      }
+      function modver() {
+        TZ=UTC git --no-pager show \
+        --quiet \
+        --abbrev=12 \
+        --date='format-local:%Y%m%d%H%M%S' \
+        --format="%cd-%h"
+      }
+      alias modver=modver
+      function juju_kill_controllers() {
+        juju controllers --format=yaml | yq '.controllers | keys | .[]' | xargs -n 1 juju kill-controller --no-prompt --timeout 0s
+      }
+      alias juju-kill-controllers=juju_kill_controllers
     '';
     oh-my-zsh = {
       enable = true;
@@ -147,6 +146,14 @@ in {
       src = pkgs.zsh-vi-mode;
       file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
     }];
+  };
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    extensions = [
+      { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
+    ];
   };
 
   programs.wofi = {
@@ -237,9 +244,9 @@ in {
       # use Mouse+$mod to drag floating windows to their wanted position
       floating_modifier $mod
 
-      bindsym $mod+Return exec alacritty 
+      bindsym $mod+Return exec alacritty
       bindsym $mod+Shift+q kill
-      bindsym $mod+d exec LC_ALL="C" wofi --show run --font "DejaVu Serif 18" -m -4 
+      bindsym $mod+d exec LC_ALL="C" wofi --show run --font "DejaVu Serif 18" -m -4
       bindsym $mod+Left focus left
       bindsym $mod+Down focus down
       bindsym $mod+Up focus up
@@ -288,7 +295,7 @@ in {
       # exit i3 (logs you out of your X session)
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your session.' -B 'Yes, exit sway' 'swaymsg exit'"
 
-      bindsym $mod+shift+s exec grim -g "$(slurp)" -t png /dev/stdout | wl-copy -t image/png 
+      bindsym $mod+shift+s exec grim -g "$(slurp)" -t png /dev/stdout | wl-copy -t image/png
 
       # resize window (you can also use the mouse for that)
       mode "resize" {
@@ -338,7 +345,7 @@ in {
       workspace 9 output $disp2 $disp1
       workspace 10 output $disp2 $disp1
 
-      bindsym $mod+l exec ${pkgs.swaylock}/bin/swaylock -c 303030 
+      bindsym $mod+l exec ${pkgs.swaylock}/bin/swaylock -c 303030
 
       for_window [app_id="galculator"] floating enable
       for_window [app_id="firefox" title="^Picture-in-Picture$"] floating enable, move position 877 450, sticky enable
