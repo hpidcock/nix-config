@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   runscript = pkgs.writeShellScriptBin "sway-run" ''
     export XDG_SESSION_TYPE="wayland"
