@@ -31,7 +31,6 @@ in {
     pkgs.spotify
     pkgs._1password-gui
     pkgs.signal-desktop
-    pkgs.zed-editor
   ];
   home.sessionVariables = {
     EDITOR = "vim";
@@ -425,6 +424,22 @@ in {
         "clock" = {
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
           format-alt = "{:%Y-%m-%d}";
+        };
+      };
+    };
+  };
+
+  programs.zed-editor = {
+    enable = true;
+    extraPackages = [
+      pkgs.package-version-server
+    ];
+    userSettings = {
+      lsp = {
+        package-version-server = {
+          binary = {
+            path = "package-version-server";
+          };
         };
       };
     };
