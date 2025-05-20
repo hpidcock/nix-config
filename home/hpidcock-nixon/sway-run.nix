@@ -10,7 +10,8 @@ let
 
     exec ${pkgs.sway}/bin/swaymsg exit
   '';
-in pkgs.symlinkJoin {
+in
+pkgs.symlinkJoin {
   name = "sway-run";
   paths = [ runscript ];
   buildInputs = [ pkgs.makeWrapper ];

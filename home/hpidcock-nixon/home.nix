@@ -1,6 +1,14 @@
-{ config, pkgs, lib, inputs, ... }:
-let sway-run = (import ./sway-run.nix { inherit pkgs lib; });
-in {
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
+let
+  sway-run = (import ./sway-run.nix { inherit pkgs lib; });
+in
+{
   home.username = "hpidcock";
   home.homeDirectory = "/home/hpidcock";
   home.packages = [
@@ -36,7 +44,9 @@ in {
     EDITOR = "vim";
     PATH = "/home/hpidcock/go/bin:$PATH";
   };
-  home.language = { base = "en_AU.utf8"; };
+  home.language = {
+    base = "en_AU.utf8";
+  };
 
   services.gpg-agent = {
     enable = true;
@@ -54,8 +64,12 @@ in {
       key = "47A14177CFB4DB92";
     };
     extraConfig.url = {
-      "git+ssh://git.launchpad.net/" = { insteadOf = "lp:"; };
-      "ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
+      "git+ssh://git.launchpad.net/" = {
+        insteadOf = "lp:";
+      };
+      "ssh://git@github.com/" = {
+        insteadOf = "https://github.com/";
+      };
     };
     extraConfig.safe.directory = "/etc/nixos";
   };
@@ -64,7 +78,9 @@ in {
     enable = true;
     package = pkgs.alacritty;
     settings = {
-      general = { live_config_reload = true; };
+      general = {
+        live_config_reload = true;
+      };
       font.size = 17.0;
       font.bold.family = "DejaVu Sans Mono";
       font.italic.family = "DejaVu Sans Mono";
@@ -77,7 +93,9 @@ in {
       scrolling.history = 10000;
       scrolling.multiplier = 3;
       selection.save_to_clipboard = false;
-      terminal = { shell.program = "zsh"; };
+      terminal = {
+        shell.program = "zsh";
+      };
       window = {
         decorations = "full";
         dynamic_padding = false;
@@ -141,11 +159,13 @@ in {
       plugins = [ ];
       theme = "agnoster";
     };
-    plugins = [{
-      name = "vi-mode";
-      src = pkgs.zsh-vi-mode;
-      file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
-    }];
+    plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
+    ];
   };
 
   programs.chromium = {
@@ -404,7 +424,6 @@ in {
           background-color: rgba(7, 54, 66, 0.8);
       }
 
-
       @keyframes blink {
           to {
               background-color: #ffffff;
@@ -416,11 +435,21 @@ in {
       mainBar = {
         layer = "top";
         height = 20;
-        modules-left = [ "sway/workspaces" "sway/mode" ];
+        modules-left = [
+          "sway/workspaces"
+          "sway/mode"
+        ];
         modules-center = [ ];
-        modules-right = [ "clock" "tray" ];
-        "sway/mode" = { format = ''<span style="italic">{}</span>''; };
-        "tray" = { spacing = 10; };
+        modules-right = [
+          "clock"
+          "tray"
+        ];
+        "sway/mode" = {
+          format = ''<span style="italic">{}</span>'';
+        };
+        "tray" = {
+          spacing = 10;
+        };
         "clock" = {
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
           format-alt = "{:%Y-%m-%d}";
@@ -435,8 +464,30 @@ in {
       pkgs.package-version-server
     ];
     userSettings = {
+      theme = "Gruvbox Light";
+      buffer_font_size = 14.0;
+      vim_mode = true;
+      buffer_font_features = {
+        calt = false;
+      };
+      terminal = {
+        font_family = "DejaVu Sans Mono";
+      };
+      remove_trailing_whitespace_on_save = false;
+      show_whitespace = "all";
+      wrap_guides = [ 80 ];
+      languages = {
+        "Go" = {
+          remove_trailing_whitespace_on_save = false;
+          use_autoclose = false;
+          tab_size = 4;
+        };
+        "YAML" = {
+          tab_size = 2;
+        };
+      };
       lsp = {
-        package-version-server = {
+        "package-version-server" = {
           binary = {
             path = "package-version-server";
           };
