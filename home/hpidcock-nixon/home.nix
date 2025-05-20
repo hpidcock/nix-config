@@ -15,7 +15,7 @@ in {
 
     pkgs.nixd
     pkgs.nil
-    pkgs.nixfmt
+    pkgs.nixfmt-rfc-style
 
     sway-run
     pkgs.mako
@@ -43,7 +43,7 @@ in {
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
-    pinentryPackage = pkgs.pinentry-rofi;
+    pinentry.package = pkgs.pinentry-rofi;
   };
 
   programs.git = {
@@ -119,7 +119,7 @@ in {
 
   programs.zsh = {
     enable = true;
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       zvm_config() {
         ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLOCK
         ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
