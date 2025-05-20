@@ -492,6 +492,13 @@ in
             path = "package-version-server";
           };
         };
+        "nil" = {
+          initialization_options = {
+            formatting = {
+              command = [ "nixfmt" ];
+            };
+          };
+        };
       };
     };
   };
