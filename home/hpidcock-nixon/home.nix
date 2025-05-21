@@ -7,12 +7,27 @@
   imports = [
     ./alacritty.nix
     ./sway.nix
-    ./waybar.nix
-    ./wofi.nix
   ];
 
   home.username = "hpidcock";
   home.homeDirectory = "/home/hpidcock";
+  home.sessionVariables = {
+    EDITOR = "vim";
+    PATH = "/home/hpidcock/go/bin:$PATH";
+  };
+  home.language = {
+    base = "en_AU.utf8";
+  };
+  fonts.fontconfig = {
+    enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+    defaultCacheTtl = 1800;
+    enableSshSupport = true;
+    pinentry.package = pkgs.pinentry-rofi;
+  };
+
   home.packages = [
     pkgs.zsh
     pkgs.vim
@@ -29,20 +44,6 @@
     pkgs._1password-gui
     pkgs.signal-desktop
   ];
-  home.sessionVariables = {
-    EDITOR = "vim";
-    PATH = "/home/hpidcock/go/bin:$PATH";
-  };
-  home.language = {
-    base = "en_AU.utf8";
-  };
-
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-    pinentry.package = pkgs.pinentry-rofi;
-  };
 
   programs.git = {
     enable = true;
@@ -99,13 +100,6 @@
     ];
   };
 
-  home.pointerCursor = {
-    enable = true;
-    package = pkgs.apple-cursor;
-    name = "macOS";
-    gtk.enable = true;
-  };
-
   programs.zed-editor = {
     enable = true;
     extraPackages = [
@@ -157,10 +151,6 @@
         };
       };
     };
-  };
-
-  fonts.fontconfig = {
-    enable = true;
   };
 
   programs.home-manager.enable = true;

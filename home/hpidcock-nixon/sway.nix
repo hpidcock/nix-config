@@ -7,6 +7,11 @@ let
   sway-run = (import ./sway-run.nix { inherit pkgs lib; });
 in
 {
+  imports = [
+    ./waybar.nix
+    ./wofi.nix
+  ];
+
   home.packages = [
     sway-run
 
@@ -18,6 +23,13 @@ in
     pkgs.wl-clipboard
     pkgs.wofi
   ];
+
+  home.pointerCursor = {
+    enable = true;
+    package = pkgs.apple-cursor;
+    name = "macOS";
+    gtk.enable = true;
+  };
 
   wayland.windowManager.sway = {
     enable = true;
