@@ -4,7 +4,7 @@
 }:
 {
   home.packages = [
-    pkgs.powerline-fonts
+    pkgs.nerd-fonts.blex-mono
   ];
 
   programs.alacritty = {
@@ -13,10 +13,10 @@
       general = {
         live_config_reload = true;
       };
-      font.size = 17.0;
-      font.bold.family = "DejaVu Sans Mono";
-      font.italic.family = "DejaVu Sans Mono";
-      font.normal.family = "DejaVu Sans Mono";
+      font.size = 18.0;
+      font.bold.family = "BlexMono Nerd Font";
+      font.italic.family = "BlexMono Nerd Font";
+      font.normal.family = "BlexMono Nerd Font";
       cursor = {
         style = "Block";
         unfocused_hollow = true;

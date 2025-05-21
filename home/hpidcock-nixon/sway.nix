@@ -9,11 +9,14 @@ in
 {
   home.packages = [
     sway-run
-    
+
+    pkgs.alacritty
     pkgs.grim
     pkgs.mako
     pkgs.slurp
+    pkgs.waybar
     pkgs.wl-clipboard
+    pkgs.wofi
   ];
 
   wayland.windowManager.sway = {

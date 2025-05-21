@@ -71,17 +71,11 @@
         ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_UNDERLINE
       }
       function modver() {
-        TZ=UTC git --no-pager show \
-        --quiet \
-        --abbrev=12 \
+        TZ=UTC git --no-pager show --quiet --abbrev=12 \
         --date='format-local:%Y%m%d%H%M%S' \
         --format="%cd-%h"
       }
       alias modver=modver
-      function juju_kill_controllers() {
-        juju controllers --format=yaml | yq '.controllers | keys | .[]' | xargs -n 1 juju kill-controller --no-prompt --timeout 0s
-      }
-      alias juju-kill-controllers=juju_kill_controllers
     '';
     oh-my-zsh = {
       enable = true;
@@ -115,20 +109,25 @@
   programs.zed-editor = {
     enable = true;
     extraPackages = [
-      pkgs.package-version-server
-      pkgs.nixd
+      pkgs.nerd-fonts.blex-mono
       pkgs.nil
+      pkgs.nixd
       pkgs.nixfmt-rfc-style
+      pkgs.package-version-server
     ];
     userSettings = {
       theme = "Gruvbox Light";
-      buffer_font_size = 14.0;
       vim_mode = true;
+      ui_font_size = 18.0;
+      buffer_font_size = 18.0;
       buffer_font_features = {
         calt = false;
       };
       terminal = {
-        font_family = "DejaVu Sans Mono";
+        font_family = "BlexMono Nerd Font";
+        shell = {
+          program = "${pkgs.zsh}/bin/zsh";
+        };
       };
       remove_trailing_whitespace_on_save = false;
       show_whitespace = "all";
@@ -158,6 +157,10 @@
         };
       };
     };
+  };
+
+  fonts.fontconfig = {
+    enable = true;
   };
 
   programs.home-manager.enable = true;
