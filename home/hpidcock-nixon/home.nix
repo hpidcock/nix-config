@@ -43,6 +43,8 @@
     pkgs.spotify
     pkgs._1password-gui
     pkgs.signal-desktop
+
+    pkgs.podman
   ];
 
   programs.git = {

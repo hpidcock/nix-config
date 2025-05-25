@@ -70,6 +70,7 @@
   environment.systemPackages = with pkgs; [
     vim
     wget
+    uutils-coreutils-noprefix
   ];
   system.userActivationScripts = {
     home-manager-symlink = {
@@ -78,6 +79,8 @@
       '';
     };
   };
+
+  virtualisation.podman.enable = true;
 
   programs.steam = {
     enable = true;
