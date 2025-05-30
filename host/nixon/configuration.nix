@@ -17,6 +17,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  time.timeZone = "Australia/Brisbane";
+  i18n.defaultLocale = "en_AU.UTF-8";
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -28,8 +31,11 @@
 
   networking.hostName = "nixon"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  time.timeZone = "Australia/Brisbane";
-  i18n.defaultLocale = "en_AU.UTF-8";
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish.enable = true;
+  };
 
   security.pam.services.swaylock = { };
   security.polkit.enable = true;
