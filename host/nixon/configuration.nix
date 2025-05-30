@@ -59,6 +59,12 @@
         --cmd sway-run
     '';
   };
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    uutils-coreutils-noprefix
+  ];
+  virtualisation.podman.enable = true;
 
   users.users.hpidcock = {
     isNormalUser = true;
@@ -73,12 +79,14 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDeEbmFNlByddlrbMW9VPQiI7KlGe6znUhJtweFefexT9brmgHNKaSoD63bYqVjrVYf3lEdilPGFpnirSbpg1hZPqFrEKAoJbDFM9R7ObXgEVt7WqKl5WNgH1tNSChCCn8Hne6BUKeqP8MQOQo5HQFZSIglsRNfumGLCH9BLIojeXeivVgXtH5ekdqR+fK+HHVdHd5bT7NfQOvT9MFNBjdSRjVTTG9xtFFuJzYqZd9ZvbXBhTq3sEAkYkFnu2SfU5LdRr+UvDQ64e/erLCLh5zqn2mbsieNaKmA/Z/Yg6LmHAgeqDmyCTf4wOPjtONHWWFEAF9b8J+NbiVxD6kVM3g7gWcKz/N1Bttleh6/+QemlzuckpDdrwOUOisZXwUS5or0DY9sJLG2cFIZNz76zZuIRXW9PI3pIcOtTXjshslupyrrP1XMtNbDDu4VSuvEk3PrS6is6bi9M1v0BbnmPbTpyV4REeJUCtPli2m0anWhFKsHMQyG+MD5sZ36s/qeYb3kdjFvU6ljYY7vDAS3Ch6WOHEKv1eT3AfzS6EwOi6HTDZ8oucGh+DMWASF4jC0+nesAjYrlBLrpn3Eh56Krkv4nxLGpjC+VJKCFG3aeT7pjw9oUMbjZpeqmIICeG74Sg2iNwMuOVEYplMLNw8mgGxzbMT51VZhjmE/dNovm+Vt4Q== haza55@gmail.com"
     ];
   };
-
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    uutils-coreutils-noprefix
-  ];
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "hpidcock" ];
+  };
+  programs.steam = {
+    enable = true;
+    gamescopeSession.enable = true;
+  };
   system.userActivationScripts = {
     home-manager-symlink = {
       text = ''
@@ -87,16 +95,9 @@
     };
   };
 
-  virtualisation.podman.enable = true;
-
-  programs.steam = {
-    enable = true;
-    gamescopeSession.enable = true;
-  };
-  nixpkgs.config.allowUnfree = true;
-
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   # DO NOT CHANGE.
   system.stateVersion = "24.11";
+  nixpkgs.config.allowUnfree = true;
 }
