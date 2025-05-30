@@ -41,11 +41,20 @@
     pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify
+    pkgs._1password-cli
     pkgs._1password-gui
     pkgs.signal-desktop
 
     pkgs.podman
   ];
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent "~/.1password/agent.sock"
+    '';
+  };
 
   programs.git = {
     enable = true;

@@ -111,6 +111,7 @@ in
       # Environment
       exec --no-startup-id ${pkgs.mako}/bin/mako
       exec --no-startup-id ${pkgs.waybar}/bin/waybar
+      exec --no-startup-id ${pkgs._1password-gui}/bin/1password
 
       # Display setup
       set $left "DP-2"
