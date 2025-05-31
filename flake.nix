@@ -13,6 +13,7 @@
 
       homeConfigurations = {
         "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
+        "hpidcock@magic-mac" = import ./home/hpidcock-magic-mac { inherit self inputs; };
       };
 
     };
