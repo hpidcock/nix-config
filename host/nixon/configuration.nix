@@ -37,6 +37,7 @@
     publish.enable = true;
   };
   services.openssh.enable = true;
+  services.tailscale.enable = true;
 
   security.pam.services.swaylock = { };
   security.polkit.enable = true;
