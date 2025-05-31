@@ -41,7 +41,6 @@
     pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify
-    pkgs._1password-cli
     pkgs._1password-gui
     pkgs.signal-desktop
 
@@ -62,7 +61,7 @@
     userEmail = "harry.pidcock@canonical.com";
     signing = {
       signByDefault = true;
-      key = "47A14177CFB4DB92";
+      key = "C80B31F3A3B03C28C9ACAFFB89E735F9C1156A58";
     };
     extraConfig.url = {
       "git+ssh://git.launchpad.net/" = {
