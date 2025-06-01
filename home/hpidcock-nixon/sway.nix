@@ -91,7 +91,7 @@ in
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'Confirm' -B 'Yes, exit sway' 'swaymsg exit'"
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
-      bindsym $mod+l exec ${pkgs.swaylock}/bin/swaylock -c 303030 -i ${./bg.jpg}
+      bindsym $mod+l exec ${pkgs._1password-gui}/bin/1password --lock && ${pkgs.swaylock}/bin/swaylock -c 303030 -i ${./bg.jpg}
 
       # Window Colours        border    bg        text      indicator c_border
       client.focused          #00000000 #859900AA #00000000 #00000000 #00000000
@@ -111,7 +111,7 @@ in
       # Environment
       exec --no-startup-id ${pkgs.mako}/bin/mako
       exec --no-startup-id ${pkgs.waybar}/bin/waybar
-      exec --no-startup-id ${pkgs._1password-gui}/bin/1password
+      exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent
 
       # Display setup
       set $left "DP-2"
