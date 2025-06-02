@@ -21,6 +21,7 @@
       };
       terminal = {
         font_family = "BlexMono Nerd Font";
+        line_height = "standard";
         shell = {
           program = "${pkgs.zsh}/bin/zsh";
         };
