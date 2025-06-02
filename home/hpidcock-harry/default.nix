@@ -12,5 +12,13 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ];
   };
   modules = [ ./home.nix ];
-  extraSpecialArgs = { inherit inputs; };
+  extraSpecialArgs = {
+    inherit inputs;
+    pkgs-23-11 = import inputs.nixpkgs-23-11 {
+      system = "x86_64-linux";
+      config = {
+        allowUnfree = true;
+      };
+    };
+  };
 }

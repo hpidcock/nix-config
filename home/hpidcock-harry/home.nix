@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-23-11,
   ...
 }:
 {
@@ -44,6 +45,7 @@
     pkgs.spotify
     pkgs._1password-gui
     pkgs.signal-desktop
+    pkgs.element-desktop
 
     pkgs.podman
     pkgs.podman-compose
@@ -53,7 +55,14 @@
     pkgs.awscli2
     pkgs.google-cloud-sdk
     pkgs.ssm-session-manager-plugin
+
+    (pkgs.callPackage ../../pkgs/juju-dev-shell { pkgs-23-11 = pkgs-23-11; })
   ];
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.ssh = {
     enable = true;
@@ -79,7 +88,6 @@
         insteadOf = "https://github.com/";
       };
     };
-    extraConfig.safe.directory = "/etc/nixos";
   };
 
   programs.chromium = {
@@ -89,10 +97,13 @@
       { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
     ];
   };
-  
+
   nix = {
     package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   programs.home-manager.enable = true;
