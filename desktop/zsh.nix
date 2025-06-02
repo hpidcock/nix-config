@@ -67,6 +67,7 @@
           Ubuntu = "󰕈";
           Linux = "󰌽";
           Macos = "󰀵";
+          NixOS = "";
         };
       };
       username = {
