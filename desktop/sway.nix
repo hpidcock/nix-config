@@ -119,7 +119,7 @@ in
 
       output $left pos 0 0 res 3840x2160@143.963Hz
       output $right pos 3840 0 res 3840x2160@143.963Hz
-      output "*" background ${./bg.jpg} fill
+      output "*" background ${../resources/bg.jpg} fill
 
       workspace 1 output $left $right
       workspace 2 output $left $right
