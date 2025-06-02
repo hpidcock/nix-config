@@ -17,11 +17,6 @@
       }
       alias modver=modver
     '';
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ ];
-      theme = "agnoster";
-    };
     plugins = [
       {
         name = "vi-mode";
@@ -29,5 +24,103 @@
         file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
+  };
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      add_newline = false;
+      format = lib.concatStrings [
+        "[](color_orange)"
+        "$os"
+        "$username"
+        "[](bg:color_yellow fg:color_orange)"
+        "$directory"
+        "[](fg:color_yellow bg:color_aqua)"
+        "$git_branch"
+        "$git_status"
+        "[](fg:color_aqua bg:color_bg1)"
+#        "[](fg:color_blue bg:color_bg3)"
+#        "[](fg:color_bg3 bg:color_bg1)"
+        "$character"
+        "[ ](fg:color_bg1)"
+#        "$line_break$character"
+      ];
+      palette = "solarized_dark";
+      palettes.gruvbox_dark = {
+        color_fg0 = "#fbf1c7";
+        color_bg1 = "#3c3836";
+        color_bg3 = "#665c54";
+        color_blue = "#458588";
+        color_aqua = "#689d6a";
+        color_green = "#98971a";
+        color_orange = "#d65d0e";
+        color_purple = "#b16286";
+        color_red = "#cc241d";
+        color_yellow = "#d79921";
+      };
+      palettes.solarized_dark = {
+        color_fg0 = "#eee8d5";
+        color_bg1 = "#073642";
+        color_bg3 = "#586e75";
+        color_blue = "#268bd2";
+        color_aqua = "#2aa198";
+        color_green = "#859900";
+        color_orange = "#cb4b16";
+        color_purple = "#6c71c4";
+        color_red = "#dc322f";
+        color_yellow = "#b58900";
+      };
+      os = {
+        disabled = false;
+        style = "bg:color_orange fg:color_fg0";
+        symbols = {
+          Ubuntu = "󰕈";
+          Linux = "󰌽";
+          Macos = "󰀵";
+        };
+      };
+      username = {
+        show_always = true;
+        style_user = "bg:color_orange fg:color_fg0";
+        style_root = "bg:color_orange fg:color_fg0";
+        format = "[ $user ]($style)";
+      };
+      directory = {
+        style = "fg:color_fg0 bg:color_yellow";
+        format = "[ $path ]($style)";
+        truncation_length = 0;
+        truncation_symbol = "…/";
+        substitutions = {
+          "Documents" = "󰈙 ";
+          "Downloads" = " ";
+          "Music" = "󰝚 ";
+          "Pictures" = " ";
+          "Developer" = "󰲋 ";
+        };
+      };
+      git_branch = {
+        symbol = "";
+        style = "bg:color_aqua";
+        format = "[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)";
+      };
+      git_status = {
+        style = "bg:color_aqua";
+        format = "[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)";
+      };
+      line_break = {
+        disabled = true;
+      };
+      character = {
+        disabled = false;
+        format = "[ ](bg:color_bg1)$symbol";
+        success_symbol = "[#](fg:color_aqua bg:color_bg1)";
+        error_symbol = "[#](fg:color_red bg:color_bg1)";
+        vimcmd_symbol = "[#](fg:color_green bg:color_bg1)";
+        vimcmd_replace_one_symbol = "[#](fg:color_purple bg:color_bg1)";
+        vimcmd_replace_symbol = "[#](fg:color_purple bg:color_bg1)";
+        vimcmd_visual_symbol = "[#](fg:color_yellow bg:color_bg1)";
+      };
+    };
   };
 }
