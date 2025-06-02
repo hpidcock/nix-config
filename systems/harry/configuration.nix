@@ -2,9 +2,11 @@
   system-manager,
   pkgs,
   ...
-}: let
+}:
+let
   system = "x86_64-linux";
-in {
+in
+{
   config = {
     nixpkgs.hostPlatform = system;
     system-manager.allowAnyDistro = true;

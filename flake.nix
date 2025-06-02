@@ -25,7 +25,7 @@
         "hpidcock@magic-mac" = import ./home/hpidcock-magic-mac { inherit self inputs; };
         "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
       };
-      
+
       systemConfigs = {
         "harry" = import ./systems/harry { inherit self inputs; };
       };

@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   programs.zsh = {
     enable = true;
     initContent = lib.mkBefore ''
@@ -29,6 +30,9 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      # Transliteration of https://github.com/starship/starship/blob/master/docs
+      # /public/presets/toml/pastel-powerline.toml
+      # Heavily modified but under original ISC license.
       add_newline = false;
       format = lib.concatStrings [
         "[](color_orange)"
@@ -40,25 +44,10 @@
         "$git_branch"
         "$git_status"
         "[](fg:color_aqua bg:color_bg1)"
-#        "[](fg:color_blue bg:color_bg3)"
-#        "[](fg:color_bg3 bg:color_bg1)"
         "$character"
         "[ ](fg:color_bg1)"
-#        "$line_break$character"
       ];
       palette = "solarized_dark";
-      palettes.gruvbox_dark = {
-        color_fg0 = "#fbf1c7";
-        color_bg1 = "#3c3836";
-        color_bg3 = "#665c54";
-        color_blue = "#458588";
-        color_aqua = "#689d6a";
-        color_green = "#98971a";
-        color_orange = "#d65d0e";
-        color_purple = "#b16286";
-        color_red = "#cc241d";
-        color_yellow = "#d79921";
-      };
       palettes.solarized_dark = {
         color_fg0 = "#eee8d5";
         color_bg1 = "#073642";

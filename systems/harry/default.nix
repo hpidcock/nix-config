@@ -1,6 +1,6 @@
 { inputs, ... }:
 inputs.system-manager.lib.makeSystemConfig {
-  modules = [ 
+  modules = [
     inputs.nix-system-graphics.systemModules.default
     ./configuration.nix
   ];
