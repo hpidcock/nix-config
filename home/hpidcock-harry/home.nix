@@ -5,15 +5,16 @@
 {
   imports = [
     ../../desktop/alacritty.nix
+    ../../desktop/sway.nix
     ../../desktop/zsh.nix
     ../../desktop/zed.nix
   ];
 
   home.username = "hpidcock";
-  home.homeDirectory = "/Users/hpidcock";
+  home.homeDirectory = "/home/hpidcock";
   home.sessionVariables = {
     EDITOR = "vim";
-    PATH = "/Users/hpidcock/go/bin:$PATH";
+    PATH = "/home/hpidcock/go/bin:$PATH";
   };
   home.language = {
     base = "en_AU.utf8";
@@ -25,10 +26,10 @@
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+    pinentry.package = pkgs.pinentry-rofi;
   };
 
   home.packages = [
-    pkgs.zsh
     pkgs.vim
     pkgs.git
     pkgs.gh
@@ -36,8 +37,31 @@
     pkgs.wget
     pkgs.curl
     pkgs.gnupg
+    pkgs.pinentry-rofi
+
+    pkgs.firefox
+    pkgs.standardnotes
+    pkgs.spotify
+    pkgs._1password-gui
+    pkgs.signal-desktop
+
     pkgs.podman
+    pkgs.podman-compose
+    pkgs.skopeo
+    pkgs.minikube
+    pkgs.kubectl
+    pkgs.awscli2
+    pkgs.google-cloud-sdk
+    pkgs.ssm-session-manager-plugin
   ];
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent "~/.1password/agent.sock"
+    '';
+  };
 
   programs.git = {
     enable = true;
@@ -57,10 +81,13 @@
     };
     extraConfig.safe.directory = "/etc/nixos";
   };
-  
-  nix = {
-    package = pkgs.nix;
-    settings.experimental-features = [ "nix-command" "flakes" ];
+
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    extensions = [
+      { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
+    ];
   };
 
   programs.home-manager.enable = true;
