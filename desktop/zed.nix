@@ -1,10 +1,12 @@
 {
   pkgs,
+  pkgs-unstable,
   ...
 }:
 {
   programs.zed-editor = {
     enable = true;
+    package = pkgs-unstable.zed-editor;
     extraPackages = [
       pkgs.nerd-fonts.blex-mono
       pkgs.nil

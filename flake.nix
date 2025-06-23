@@ -1,7 +1,8 @@
 {
   inputs = {
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-23-11.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs-23-11.url = "github:nixos/nixpkgs/nixos-23.11";
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     system-manager = {
       url = "github:numtide/system-manager";

@@ -7,5 +7,13 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
   };
   modules = [ ./home.nix ];
-  extraSpecialArgs = { inherit inputs; };
+  extraSpecialArgs = {
+    inherit inputs;
+    pkgs-unstable = import inputs.nixpkgs-unstable {
+      system = "x86_64-linux";
+      config = {
+        allowUnfree = true;
+      };
+    };
+  };
 }
