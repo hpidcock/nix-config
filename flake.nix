@@ -12,6 +12,7 @@
       url = "github:soupglasses/nix-system-graphics";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mac-app-util.url = "github:hraban/mac-app-util?ref=link-contents";
   };
   outputs =
     { self, ... }@inputs:

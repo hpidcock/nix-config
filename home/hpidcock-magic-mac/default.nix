@@ -6,7 +6,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       allowUnfree = true;
     };
   };
-  modules = [ ./home.nix ];
+  modules = [
+    inputs.mac-app-util.homeManagerModules.default
+    ./home.nix
+  ];
   extraSpecialArgs = {
     inherit inputs;
     pkgs-unstable = import inputs.nixpkgs-unstable {
