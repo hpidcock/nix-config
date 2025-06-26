@@ -42,6 +42,9 @@
           tab_size = 2;
         };
       };
+      edit_predictions = {
+        mode = "subtle";
+      };
       lsp = {
         "package-version-server" = {
           binary = {
