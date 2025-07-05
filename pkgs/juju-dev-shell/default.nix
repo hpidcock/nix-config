@@ -26,7 +26,7 @@ let
     #charmcraft
     pkgs-23-11.mongodb-4_4
   ];
-  libs = with pkgs; [ sqlite ];
+  libs = with pkgs; [ sqlite libxcrypt ];
   devPackages = map (lib.getOutput "dev") libs;
   libPackages = map (lib.getOutput "lib") libs;
 in
