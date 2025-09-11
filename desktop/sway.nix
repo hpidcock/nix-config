@@ -100,8 +100,8 @@ in
       client.urgent           #00000000 #00000000 #00000000 #00000000 #00000000
 
       # Layout and Borders
-      gaps inner 8
-      gaps outer 4
+      gaps inner 6
+      gaps outer 0
       hide_edge_borders both
       titlebar_border_thickness 0
       titlebar_padding 0

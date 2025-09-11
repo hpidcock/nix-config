@@ -31,8 +31,11 @@
         };
       };
       remove_trailing_whitespace_on_save = false;
-      show_whitespace = "all";
-      wrap_guides = [ 80 ];
+      show_whitespaces = "all";
+      wrap_guides = [ 80 81 82 ];
+      "experimental.theme_overrides" = {
+        "editor.wrap_guide" = "#28282840";
+      };
       languages = {
         "Go" = {
           remove_trailing_whitespace_on_save = false;

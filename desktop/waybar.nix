@@ -48,7 +48,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        height = 20;
+        height = 18;
         modules-left = [
           "sway/workspaces"
           "sway/mode"
@@ -62,7 +62,7 @@
           format = ''<span style="italic">{}</span>'';
         };
         "tray" = {
-          spacing = 10;
+          spacing = 8;
         };
         "clock" = {
           tooltip-format = "{:%Y-%m-%d | %H:%M}";

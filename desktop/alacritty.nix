@@ -33,8 +33,8 @@
         dynamic_padding = false;
         opacity = 0.85;
         startup_mode = "Windowed";
-        padding.x = 2;
-        padding.y = 2;
+        padding.x = 4;
+        padding.y = 4;
       };
       colors = {
         draw_bold_text_with_bright_colors = true;
