@@ -1,6 +1,7 @@
 {
   pkgs,
   pkgs-23-11,
+  pkgs-unstable,
   ...
 }:
 {
@@ -32,13 +33,13 @@
 
   home.packages = [
     pkgs.vim
-    pkgs.git
     pkgs.gh
     pkgs.htop
     pkgs.wget
     pkgs.curl
     pkgs.gnupg
     pkgs.pinentry-rofi
+    pkgs.esphome
 
     pkgs.firefox
     pkgs.standardnotes
@@ -74,6 +75,7 @@
 
   programs.git = {
     enable = true;
+    package = pkgs.gitFull;
     userName = "Harry Pidcock";
     userEmail = "harry.pidcock@canonical.com";
     signing = {
