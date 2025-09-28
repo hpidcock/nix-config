@@ -37,6 +37,7 @@
     pkgs.curl
     pkgs.gnupg
     pkgs.podman
+    pkgs.librewolf
   ];
 
   programs.git = {

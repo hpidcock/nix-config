@@ -4,14 +4,16 @@
   ...
 }:
 {
+  home.packages = [
+    pkgs.nil
+    pkgs.nixd
+    pkgs.nixfmt-rfc-style
+  ];
   programs.zed-editor = {
     enable = true;
     package = pkgs-unstable.zed-editor;
     extraPackages = [
       pkgs.nerd-fonts.blex-mono
-      pkgs.nil
-      pkgs.nixd
-      pkgs.nixfmt-rfc-style
       pkgs.package-version-server
     ];
     userSettings = {
