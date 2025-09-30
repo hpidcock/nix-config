@@ -1,13 +1,14 @@
 {
   pkgs,
   pkgs-23-11,
+  pkgs-unstable,
   lib,
   ...
 }:
 let
   packages = with pkgs; [
     zsh
-    go_1_24
+    pkgs-unstable.go
     yq-go
     jq
     gnumake
@@ -26,7 +27,10 @@ let
     #charmcraft
     pkgs-23-11.mongodb-4_4
   ];
-  libs = with pkgs; [ sqlite libxcrypt ];
+  libs = with pkgs; [
+    sqlite
+    libxcrypt
+  ];
   devPackages = map (lib.getOutput "dev") libs;
   libPackages = map (lib.getOutput "lib") libs;
 in

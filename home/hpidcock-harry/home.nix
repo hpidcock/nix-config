@@ -58,7 +58,10 @@
     pkgs.google-cloud-sdk
     pkgs.ssm-session-manager-plugin
 
-    (pkgs.callPackage ../../pkgs/juju-dev-shell { pkgs-23-11 = pkgs-23-11; })
+    (pkgs.callPackage ../../pkgs/juju-dev-shell {
+      pkgs-23-11 = pkgs-23-11;
+      pkgs-unstable = pkgs-unstable;
+    })
   ];
 
   programs.direnv = {
