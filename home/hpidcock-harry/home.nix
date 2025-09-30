@@ -41,6 +41,7 @@
     pkgs.pinentry-rofi
     pkgs.esphome
 
+    pkgs.librewolf
     pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify
