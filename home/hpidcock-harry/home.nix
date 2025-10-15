@@ -40,6 +40,7 @@
     pkgs.gnupg
     pkgs.pinentry-rofi
     pkgs.esphome
+    pkgs.difftastic
 
     pkgs.librewolf
     pkgs.firefox
@@ -52,7 +53,7 @@
     pkgs.podman
     pkgs.podman-compose
     pkgs.skopeo
-    pkgs.minikube
+    pkgs-unstable.minikube
     pkgs.kubectl
     pkgs.awscli2
     pkgs.google-cloud-sdk
