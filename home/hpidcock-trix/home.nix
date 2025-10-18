@@ -28,6 +28,7 @@
   };
 
   home.packages = [
+    pkgs.uutils-coreutils-noprefix
     pkgs.zsh
     pkgs.vim
     pkgs.git
