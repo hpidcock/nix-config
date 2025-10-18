@@ -1,6 +1,5 @@
 {
   pkgs,
-  pkgs-unstable,
   ...
 }:
 {
@@ -11,10 +10,9 @@
   ];
   programs.zed-editor = {
     enable = true;
-    package = pkgs-unstable.zed-editor;
+    package = pkgs.zed-editor;
     extraPackages = [
       pkgs.nerd-fonts.blex-mono
-      pkgs.package-version-server
     ];
     userSettings = {
       theme = "Gruvbox Light";
@@ -34,7 +32,11 @@
       };
       remove_trailing_whitespace_on_save = false;
       show_whitespaces = "all";
-      wrap_guides = [ 80 81 82 ];
+      wrap_guides = [
+        80
+        81
+        82
+      ];
       "experimental.theme_overrides" = {
         "editor.wrap_guide" = "#28282840";
       };
@@ -54,13 +56,21 @@
       lsp = {
         "package-version-server" = {
           binary = {
-            path = "package-version-server";
+            path = "${pkgs.package-version-server}/bin/package-version-server";
+          };
+        };
+        "nixd" = {
+          binary = {
+            path = "${pkgs.nixd}/bin/nixd";
           };
         };
         "nil" = {
+          binary = {
+            path = "${pkgs.nil}/bin/nil";
+          };
           initialization_options = {
             formatting = {
-              command = [ "nixfmt" ];
+              command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
             };
           };
         };

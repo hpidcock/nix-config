@@ -1,9 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
-
+{ lib, pkgs, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -12,53 +7,56 @@
     "flakes"
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxPackages_6_16;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    kernelPackages = pkgs.linuxPackages_6_16;
+    loader = {
+      # Use the systemd-boot EFI boot loader.
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
 
   time.timeZone = "Australia/Brisbane";
   i18n.defaultLocale = "en_AU.UTF-8";
 
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  hardware.amdgpu.amdvlk = {
-    enable = true;
-    support32Bit.enable = true;
+  networking = {
+    useDHCP = lib.mkDefault true;
+    hostName = "nixon";
+    networkmanager.enable = true;
   };
 
-  networking.hostName = "nixon"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    publish.enable = true;
+  services = {
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      publish.enable = true;
+    };
+    openssh.enable = true;
+    tailscale.enable = true;
+    printing.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
+    dbus = {
+      enable = true;
+      implementation = "broker";
+    };
+    greetd = {
+      enable = true;
+      restart = false;
+      settings.default_session.command = ''
+        ${lib.makeBinPath [ pkgs.greetd.tuigreet ]}/tuigreet \
+          -r --asterisks --time --cmd sway-run
+      '';
+    };
   };
-  services.openssh.enable = true;
-  services.tailscale.enable = true;
 
-  security.pam.services.swaylock = { };
-  security.polkit.enable = true;
-  services.printing.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
-  services.dbus = {
-    enable = true;
-    implementation = "broker";
-  };
-  services.greetd = {
-    enable = true;
-    restart = false;
-    settings.default_session.command = ''
-      ${lib.makeBinPath [ pkgs.greetd.tuigreet ]}/tuigreet -r --asterisks --time \
-        --cmd sway-run
-    '';
+  security = {
+    pam.services.swaylock = { };
+    polkit.enable = true;
   };
   environment.systemPackages = with pkgs; [
     vim
@@ -74,22 +72,15 @@
       "video"
       "render"
       "audio"
-    ]; # Enable ‘sudo’ for the user.
+    ];
     packages = with pkgs; [ home-manager ];
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDeEbmFNlByddlrbMW9VPQiI7KlGe6znUhJtweFefexT9brmgHNKaSoD63bYqVjrVYf3lEdilPGFpnirSbpg1hZPqFrEKAoJbDFM9R7ObXgEVt7WqKl5WNgH1tNSChCCn8Hne6BUKeqP8MQOQo5HQFZSIglsRNfumGLCH9BLIojeXeivVgXtH5ekdqR+fK+HHVdHd5bT7NfQOvT9MFNBjdSRjVTTG9xtFFuJzYqZd9ZvbXBhTq3sEAkYkFnu2SfU5LdRr+UvDQ64e/erLCLh5zqn2mbsieNaKmA/Z/Yg6LmHAgeqDmyCTf4wOPjtONHWWFEAF9b8J+NbiVxD6kVM3g7gWcKz/N1Bttleh6/+QemlzuckpDdrwOUOisZXwUS5or0DY9sJLG2cFIZNz76zZuIRXW9PI3pIcOtTXjshslupyrrP1XMtNbDDu4VSuvEk3PrS6is6bi9M1v0BbnmPbTpyV4REeJUCtPli2m0anWhFKsHMQyG+MD5sZ36s/qeYb3kdjFvU6ljYY7vDAS3Ch6WOHEKv1eT3AfzS6EwOi6HTDZ8oucGh+DMWASF4jC0+nesAjYrlBLrpn3Eh56Krkv4nxLGpjC+VJKCFG3aeT7pjw9oUMbjZpeqmIICeG74Sg2iNwMuOVEYplMLNw8mgGxzbMT51VZhjmE/dNovm+Vt4Q== haza55@gmail.com"
+      (lib.readFile ../../resources/ssh.pub)
     ];
   };
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
-  };
-  system.userActivationScripts = {
-    home-manager-symlink = {
-      text = ''
-        test -h $HOME/.config/home-manager || (mkdir -p $HOME/.config && ln -s /etc/nixos $HOME/.config/home-manager)
-      '';
-    };
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,

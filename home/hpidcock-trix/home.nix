@@ -5,16 +5,15 @@
 {
   imports = [
     ../../desktop/alacritty.nix
-    ../../desktop/sway.nix
     ../../desktop/zsh.nix
     ../../desktop/zed.nix
   ];
 
   home.username = "hpidcock";
-  home.homeDirectory = "/home/hpidcock";
+  home.homeDirectory = "/Users/hpidcock";
   home.sessionVariables = {
     EDITOR = "vim";
-    PATH = "/home/hpidcock/go/bin:$PATH";
+    PATH = "/Users/hpidcock/go/bin:$PATH";
   };
   home.language = {
     base = "en_AU.utf8";
@@ -26,56 +25,25 @@
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
-    pinentry.package = pkgs.pinentry-rofi;
   };
 
   home.packages = [
+    pkgs.zsh
     pkgs.vim
+    pkgs.git
     pkgs.gh
     pkgs.htop
     pkgs.wget
     pkgs.curl
     pkgs.gnupg
-    pkgs.pinentry-rofi
-    pkgs.esphome
-    pkgs.difftastic
-
-    pkgs.librewolf
-    pkgs.firefox
-    pkgs.standardnotes
-    pkgs.spotify
-    pkgs._1password-gui
-    pkgs.signal-desktop
-    pkgs.element-desktop
-
     pkgs.podman
-    pkgs.podman-compose
-    pkgs.skopeo
-    pkgs.minikube
-    pkgs.kubectl
-    pkgs.awscli2
-    pkgs.google-cloud-sdk
-    pkgs.ssm-session-manager-plugin
-
-    pkgs.juju-dev-shell
+    pkgs.librewolf
+    pkgs.spotify
+    pkgs.signal-desktop-bin
   ];
-
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      Host *
-        IdentityAgent "~/.1password/agent.sock"
-    '';
-  };
 
   programs.git = {
     enable = true;
-    package = pkgs.gitFull;
     userName = "Harry Pidcock";
     userEmail = "harry.pidcock@canonical.com";
     signing = {
@@ -90,14 +58,14 @@
         insteadOf = "https://github.com/";
       };
     };
+    extraConfig.safe.directory = "/etc/nixos";
   };
 
-  programs.chromium = {
+  programs.ssh = {
     enable = true;
-    package = pkgs.brave;
-    extensions = [
-      { id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa"; } # 1password
-    ];
+    matchBlocks."*" = {
+      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+    };
   };
 
   nix = {
@@ -109,5 +77,5 @@
   };
 
   programs.home-manager.enable = true;
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 }
