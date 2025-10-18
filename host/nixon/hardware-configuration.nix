@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -14,8 +15,15 @@
     "usbhid"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [
+    "amdgpu"
+    "kvm-amd"
+  ];
   boot.extraModulePackages = [ ];
+
+  hardware.graphics.extraPackages = with pkgs; [
+    amdvlk
+  ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/33f46b78-7bc3-4ebd-9a64-71f34c70f0d7";
