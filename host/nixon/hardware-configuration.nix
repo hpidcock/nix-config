@@ -1,8 +1,8 @@
 {
-  inputs,
   lib,
   pkgs,
   modulesPath,
+  config,
   ...
 }:
 {
@@ -43,8 +43,8 @@
   swapDevices = [ ];
 
   hardware = {
-    cpu.amd = with inputs.config.hardware; {
-      updateMicrocode = lib.mkDefault enableRedistributableFirmware;
+    cpu.amd = {
+      updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
     };
     graphics = {
       enable = true;
