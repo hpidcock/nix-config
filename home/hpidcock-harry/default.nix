@@ -26,6 +26,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs-23-11 pkgs-unstable;
         };
         minikube = pkgs-unstable.minikube;
+        zed-editor = pkgs-unstable.zed-editor;
       })
     ];
   };
