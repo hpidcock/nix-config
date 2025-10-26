@@ -25,6 +25,8 @@
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+    enableZshIntegration = true;
+    enableExtraSocket = true;
   };
 
   home.packages = [
@@ -41,7 +43,13 @@
     pkgs.librewolf
     pkgs.spotify
     pkgs.signal-desktop-bin
+    pkgs.element-desktop
   ];
+
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.git = {
     enable = true;
@@ -64,8 +72,15 @@
 
   programs.ssh = {
     enable = true;
-    matchBlocks."*" = {
+    matchBlocks."devel01.tail5183a3.ts.net" = {
       identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+      forwardAgent = true;
+      remoteForwards = [
+        {
+          bind.address = "/run/user/1000/gnupg/S.gpg-agent";
+          host.address = "/Users/hpidcock/.gnupg/S.gpg-agent.extra";
+        }
+      ];
     };
   };
 
