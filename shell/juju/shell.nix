@@ -25,7 +25,8 @@ pkgs.mkShellNoCC {
   shellHook = ''
     export GOFLAGS
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
-    if pstree -p $PPID | grep "direnv export"; then
+    PTREE=$(pstree -p $PPID)
+    if echo $PTREE | grep "direnv export"; then
        exec bash
     fi
     if [ -t 1 ]; then
