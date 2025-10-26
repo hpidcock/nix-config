@@ -5,6 +5,7 @@ let
   };
   pkgs-23-11 = import inputs.nixpkgs-23-11 {
     inherit system;
+    config.allowUnfree = true;
   };
 in
 import ./shell.nix {
