@@ -36,6 +36,7 @@
         "hpidcock@magic-mac" = import ./home/hpidcock-magic-mac { inherit self inputs; };
         "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
         "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
+        "hpidcock@devel01" = import ./home/hpidcock-devel01 { inherit self inputs; };
       };
 
       devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (system: {
