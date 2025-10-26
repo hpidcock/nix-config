@@ -19,13 +19,13 @@ pkgs.mkShellNoCC {
     shellcheck.out
     shfmt.out
     yq-go.out
+    pstree.out
   ];
 
   shellHook = ''
     export GOFLAGS
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
-    export SHELL=zsh
-    if [[ -n "$DIRENV_FILE" ]]; then
+    if pstree -p $PPID | grep "direnv export"; then
        exec bash
     fi
     if [ -t 1 ]; then
