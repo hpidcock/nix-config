@@ -25,6 +25,9 @@ pkgs.mkShellNoCC {
     export GOFLAGS
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
     export SHELL=zsh
+    if [[ -n "$DIRENV_FILE" ]]; then
+       exec bash
+    fi
     if [ -t 1 ]; then
        exec zsh
     fi
