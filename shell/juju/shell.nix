@@ -19,12 +19,11 @@ pkgs.mkShellNoCC {
     shellcheck.out
     shfmt.out
     yq-go.out
-    zsh.out
   ];
 
   shellHook = ''
     export GOFLAGS
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
-    exec ${pkgs.zsh}/bin/zsh $@
+    exec zsh $@
   '';
 }
