@@ -27,7 +27,7 @@ pkgs.mkShellNoCC {
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
     PTREE=$(pstree -p $PPID)
     if echo $PTREE | grep -o "direnv export"; then
-       exec bash
+      exit 0
     fi
     if [ -t 1 ]; then
        exec zsh
