@@ -15,10 +15,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-app-util.url = "github:hraban/mac-app-util?ref=link-contents";
-    flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
-    { self, flake-utils, ... }@inputs:
+    { self, nixpkgs, ... }@inputs:
     {
 
       nixosConfigurations = {
@@ -39,8 +38,8 @@
         "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
       };
 
-      devShells = flake-utils.lib.eachDefaultSystem (system: {
-        "juju" = import ./shell/juju { inherit self inputs system; };
+      devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (system: {
+        juju = import ./shell/juju { inherit self inputs system; };
       });
 
     };
