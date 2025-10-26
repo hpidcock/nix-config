@@ -12,9 +12,8 @@ import ./shell.nix {
     inherit system;
     overlays = [
       (final: prev: {
-        signal-desktop-bin = pkgs-unstable.signal-desktop-bin;
-        zed-editor = pkgs-unstable.zed-editor;
-        element-desktop = pkgs-unstable.element-desktop;
+        go = pkgs-unstable.go;
+        mongodb-4_4 = pkgs-23-11.mongodb-4_4;
       })
     ];
   };

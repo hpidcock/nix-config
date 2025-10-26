@@ -39,7 +39,7 @@
         "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
       };
 
-      devShells = flake-utils.lib.defaultSystems (system: {
+      devShells = flake-utils.lib.eachDefaultSystem (system: {
         "juju" = import ./shell/juju { inherit self inputs system; };
       });
 
