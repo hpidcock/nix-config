@@ -15,9 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-app-util.url = "github:hraban/mac-app-util?ref=link-contents";
+    flake-utils.url = "github:numtide/flake-utils";
   };
   outputs =
-    { self, ... }@inputs:
+    { self, flake-utils, ... }@inputs:
     {
 
       nixosConfigurations = {
@@ -26,7 +27,7 @@
       darwinConfigurations = {
         "trix" = import ./host/trix { inherit self inputs; };
       };
-      
+
       systemConfigs = {
         "harry" = import ./systems/harry { inherit self inputs; };
       };
@@ -37,6 +38,10 @@
         "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
         "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
       };
+
+      devShells = flake-utils.lib.defaultSystems (system: {
+        "juju" = import ./shell/juju { inherit self inputs system; };
+      });
 
     };
 }
