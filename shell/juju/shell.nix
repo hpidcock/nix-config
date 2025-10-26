@@ -24,6 +24,9 @@ pkgs.mkShellNoCC {
   shellHook = ''
     export GOFLAGS
     export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
-    exec zsh
+    export SHELL=zsh
+    if [ -t 1 ]; then
+       exec zsh
+    fi
   '';
 }
