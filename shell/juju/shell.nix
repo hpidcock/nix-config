@@ -16,7 +16,6 @@ pkgs.mkShellNoCC {
     gh.out
     gnumake.out
     jq.out
-    mongodb-4_4.out
     shellcheck.out
     shfmt.out
     yq-go.out
