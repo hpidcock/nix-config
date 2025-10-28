@@ -68,6 +68,10 @@
         insteadOf = "https://github.com/";
       };
     };
+    ignores = [
+      ".envrc"
+      ".direnv/"
+    ];
   };
 
   nix = {

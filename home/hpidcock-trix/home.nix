@@ -67,7 +67,10 @@
         insteadOf = "https://github.com/";
       };
     };
-    extraConfig.safe.directory = "/etc/nixos";
+    ignores = [
+      ".envrc"
+      ".direnv/"
+    ];
   };
 
   programs.ssh = {
