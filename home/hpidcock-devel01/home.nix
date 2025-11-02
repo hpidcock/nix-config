@@ -30,7 +30,6 @@
     pkgs.esphome
     pkgs.difftastic
 
-    pkgs.podman
     pkgs.podman-compose
     pkgs.skopeo
     pkgs.minikube
@@ -38,8 +37,6 @@
     pkgs.awscli2
     pkgs.google-cloud-sdk
     pkgs.ssm-session-manager-plugin
-
-    pkgs.juju-dev-shell
   ];
 
   programs.direnv = {
