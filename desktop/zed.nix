@@ -18,8 +18,8 @@
       theme = "Gruvbox Light";
       vim_mode = true;
       hide_mouse = "never";
-      ui_font_size = 18.0;
-      buffer_font_size = 18.0;
+      ui_font_size = 14.0;
+      buffer_font_size = 14.0;
       buffer_font_features = {
         calt = false;
       };

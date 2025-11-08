@@ -39,7 +39,7 @@
         "hpidcock@devel01" = import ./home/hpidcock-devel01 { inherit self inputs; };
       };
 
-      devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (system: {
+      devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (system: {
         juju = import ./shell/juju { inherit self inputs system; };
       });
 

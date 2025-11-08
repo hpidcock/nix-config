@@ -6,8 +6,9 @@ let
       allowUnfree = true;
     };
   };
+  shellFile = if system == "aarch64-darwin" then ./shell-darwin.nix else ./shell.nix;
 in
-import ./shell.nix {
+import shellFile {
   pkgs = import inputs.nixpkgs {
     inherit system;
     config = {
