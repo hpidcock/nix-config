@@ -44,6 +44,7 @@
     pkgs.spotify
     pkgs.signal-desktop-bin
     pkgs.element-desktop
+    pkgs.ollama
   ];
 
   programs.direnv = {

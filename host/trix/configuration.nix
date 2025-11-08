@@ -21,7 +21,10 @@
     localHostName = "trix";
   };
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    package = pkgs-unstable.tailscale;
+  };
   programs._1password = {
     enable = true;
     package = pkgs-unstable._1password-cli;
