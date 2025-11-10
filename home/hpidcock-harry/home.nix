@@ -37,7 +37,6 @@
     pkgs.curl
     pkgs.gnupg
     pkgs.pinentry-rofi
-    pkgs.esphome
     pkgs.difftastic
 
     pkgs.librewolf

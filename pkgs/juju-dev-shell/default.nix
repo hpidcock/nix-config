@@ -21,7 +21,7 @@ let
     azure-cli
     shfmt
     graphviz
-    python312
+    python313
     #snapcraft
     #rockcraft
     #charmcraft
