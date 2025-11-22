@@ -27,6 +27,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
         };
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;
+	ollama-rocm = pkgs-unstable.ollama-rocm;
+	ollama = pkgs-unstable.ollama;
       })
     ];
   };

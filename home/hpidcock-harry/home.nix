@@ -38,6 +38,8 @@
     pkgs.gnupg
     pkgs.pinentry-rofi
     pkgs.difftastic
+    pkgs.ripgrep
+    pkgs.ollama-rocm
 
     pkgs.librewolf
     pkgs.firefox
@@ -89,6 +91,10 @@
         insteadOf = "https://github.com/";
       };
     };
+    ignores = [
+      ".envrc"
+      ".direnv/"
+    ];
   };
 
   programs.chromium = {
