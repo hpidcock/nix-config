@@ -39,7 +39,8 @@
     pkgs.pinentry-rofi
     pkgs.difftastic
     pkgs.ripgrep
-    pkgs.ollama-rocm
+    pkgs.ollama
+    pkgs.mpv
 
     pkgs.librewolf
     pkgs.firefox
@@ -48,6 +49,7 @@
     pkgs._1password-gui
     pkgs.signal-desktop
     pkgs.element-desktop
+    pkgs.high-tide
 
     pkgs.podman
     pkgs.podman-compose
@@ -57,8 +59,6 @@
     pkgs.awscli2
     pkgs.google-cloud-sdk
     pkgs.ssm-session-manager-plugin
-
-    pkgs.juju-dev-shell
   ];
 
   programs.direnv = {

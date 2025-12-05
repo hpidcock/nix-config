@@ -17,6 +17,16 @@
         --format="%cd-%h"
       }
       alias modver=modver
+      function test_changed_packages() {
+        local changed_files=$(git diff --name-only HEAD | grep '\.go$')          
+        if [ -z "$changed_files" ]; then
+          echo "No Go files changed"
+          return 0
+        fi
+        local packages=$(echo "$changed_files" | xargs -n1 dirname | sort -u | sed 's|^|./|' | tr '\n' ' ')
+        go test "$@" $packages
+      }
+      alias ggt=test_changed_packages
     '';
     plugins = [
       {
