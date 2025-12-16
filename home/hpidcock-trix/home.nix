@@ -45,6 +45,7 @@
     pkgs.signal-desktop-bin
     pkgs.element-desktop
     pkgs.ollama
+    pkgs.utm
   ];
 
   programs.direnv = {
@@ -76,6 +77,9 @@
 
   programs.ssh = {
     enable = true;
+    matchBlocks."*" = {
+      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
+    };
     matchBlocks."github.com" = {
       identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
     };
