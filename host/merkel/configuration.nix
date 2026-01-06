@@ -54,6 +54,7 @@
     openssh.authorizedKeys.keys = [
       (lib.readFile ../../resources/ssh.pub)
     ];
+    shell = pkgs.zsh;
   };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
