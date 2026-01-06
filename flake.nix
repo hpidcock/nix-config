@@ -41,6 +41,7 @@
 
       devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (system: {
         juju = import ./shell/juju { inherit self inputs system; };
+        rp2040 = import ./shell/rp2040 { inherit self inputs system; };
       });
 
     };

@@ -21,10 +21,6 @@
     localHostName = "trix";
   };
 
-  services.tailscale = {
-    enable = true;
-    package = pkgs-unstable.tailscale;
-  };
   programs._1password = {
     enable = true;
     package = pkgs-unstable._1password-cli;
@@ -34,8 +30,12 @@
     package = pkgs-unstable._1password-gui;
   };
 
+  environment.systemPackages = [ pkgs.git ];
+
   users.users.hpidcock = {
-    packages = with pkgs; [ home-manager ];
+    packages = with pkgs; [
+      home-manager
+    ];
     openssh.authorizedKeys.keys = [
       (lib.readFile ../../resources/ssh.pub)
     ];

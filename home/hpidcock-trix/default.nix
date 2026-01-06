@@ -7,6 +7,7 @@ let
     };
     overlays = [
       (import ./overlays/signal.nix)
+      (import ./overlays/spotify.nix)
     ];
   };
 in
@@ -19,10 +20,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
     overlays = [
       (final: prev: {
         signal-desktop-bin = pkgs-unstable.signal-desktop-bin;
-        zed-editor = pkgs-unstable.zed-editor;
-        element-desktop = pkgs-unstable.element-desktop;
         spotify = pkgs-unstable.spotify;
-        ollama = pkgs-unstable.ollama;
+        esphome = pkgs-unstable.esphome;
       })
     ];
   };

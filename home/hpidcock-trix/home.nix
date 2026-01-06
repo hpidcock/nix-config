@@ -46,6 +46,7 @@
     pkgs.element-desktop
     pkgs.ollama
     pkgs.utm
+    pkgs.esphome
   ];
 
   programs.direnv = {
@@ -65,8 +66,8 @@
       "git+ssh://git.launchpad.net/" = {
         insteadOf = "lp:";
       };
-      "ssh://git@github.com/" = {
-        insteadOf = "https://github.com/";
+      "ssh://git@github.com/hpidcock" = {
+        insteadOf = "https://github.com/hpidcock";
       };
     };
     ignores = [

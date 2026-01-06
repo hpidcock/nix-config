@@ -13,6 +13,7 @@
     package = pkgs.zed-editor;
     extraPackages = [
       pkgs.nerd-fonts.blex-mono
+      pkgs.git
     ];
     userSettings = {
       theme = "Gruvbox Light";
