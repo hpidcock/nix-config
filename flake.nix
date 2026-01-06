@@ -22,6 +22,7 @@
 
       nixosConfigurations = {
         "nixon" = import ./host/nixon { inherit self inputs; };
+        "merkel" = import ./host/merkel { inherit self inputs; };
       };
       darwinConfigurations = {
         "trix" = import ./host/trix { inherit self inputs; };
@@ -37,6 +38,7 @@
         "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
         "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
         "hpidcock@devel01" = import ./home/hpidcock-devel01 { inherit self inputs; };
+        "hpidcock@merkel" = import ./home/hpidcock-merkel { inherit self inputs; };
       };
 
       devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (system: {
