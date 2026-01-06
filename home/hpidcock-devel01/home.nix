@@ -46,18 +46,19 @@
 
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
   };
 
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "Harry Pidcock";
-    userEmail = "harry.pidcock@canonical.com";
+    settings.user.name = "Harry Pidcock";
+    settings.user.email = "harry.pidcock@canonical.com";
     signing = {
       signByDefault = true;
       key = "C80B31F3A3B03C28C9ACAFFB89E735F9C1156A58";
     };
-    extraConfig.url = {
+    settings.url = {
       "git+ssh://git.launchpad.net/" = {
         insteadOf = "lp:";
       };
