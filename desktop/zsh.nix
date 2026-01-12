@@ -23,8 +23,8 @@
           echo "No Go files changed"
           return 0
         fi
-        local packages=$(echo "$changed_files" | xargs -n1 dirname | sort -u | sed 's|^|./|' | tr '\n' ' ')
-        go test "$@" $packages
+        local packages=$(echo "$changed_files" | xargs -n1 dirname | sort -u | sed 's|^|./|')
+        echo $packages | xargs go test "$@"
       }
       alias ggt=test_changed_packages
     '';

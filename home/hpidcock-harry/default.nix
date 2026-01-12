@@ -12,10 +12,14 @@ inputs.home-manager.lib.homeManagerConfiguration {
     system = "x86_64-linux";
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "openssl-1.1.1w"
+      ];
     };
     overlays = [
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
+        mongodb = super.callPackage ../../pkgs/mongodb { };
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;
         ollama-rocm = pkgs-unstable.ollama-rocm;
