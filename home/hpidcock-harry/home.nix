@@ -59,8 +59,6 @@
     pkgs.awscli2
     pkgs.google-cloud-sdk
     pkgs.ssm-session-manager-plugin
-
-    pkgs.mongodb
   ];
 
   programs.direnv = {
