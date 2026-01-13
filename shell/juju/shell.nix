@@ -20,7 +20,7 @@ pkgs.mkShellNoCC {
     shfmt.out
     yq-go.out
     pstree.out
-    mongodb-4_4.out
+    (pkgs.writeScriptBin "mongod" (builtins.readFile ../../resources/mongod.sh))
   ];
 
   shellHook = ''

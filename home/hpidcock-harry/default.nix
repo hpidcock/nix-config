@@ -19,7 +19,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
     overlays = [
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
-        mongodb = super.callPackage ../../pkgs/mongodb { };
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;
         ollama-rocm = pkgs-unstable.ollama-rocm;
