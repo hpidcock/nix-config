@@ -24,17 +24,17 @@ while [[ $# -gt 0 ]]; do
 		;;
 	--keyFile)
 		MONGOD_ARGS+=("$1" "/data/db/keyfile")
-		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/keyfile &>/dev/null")
+		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/keyfile")
 		shift 2
 		;;
 	--sslPEMKeyFile | --tlsCertificateKeyFile)
 		MONGOD_ARGS+=("$1" "/data/db/server.pem")
-		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/server.pem &>/dev/null")
+		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/server.pem")
 		shift 2
 		;;
 	--sslCAFile | --tlsCAFile)
 		MONGOD_ARGS+=("$1" "/data/db/ca.pem")
-		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/ca.pem &>/dev/null")
+		EXTRA_COMMANDS+=("podman cp $2 $mgoname:/data/db/ca.pem")
 		shift 2
 		;;
 	*)
@@ -59,6 +59,8 @@ podman create --rm --name $mgoname --net=host "${PODMAN_ARGS[@]}" \
 	docker.io/mongodb/mongodb-enterprise-server:4.4.29-ubuntu2004 \
 	"${MONGOD_ARGS[@]}" &>/dev/null
 
-${EXTRA_COMMANDS}
+for cmd in "${EXTRA_COMMANDS[@]}"; do
+	$cmd >/dev/null 2>&1
+done
 
 exec podman start -a $mgoname
