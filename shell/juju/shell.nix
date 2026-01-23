@@ -20,6 +20,7 @@ pkgs.mkShellNoCC {
     shfmt.out
     yq-go.out
     pstree.out
+    vault.out
     (pkgs.writeScriptBin "mongod" (builtins.readFile ../../resources/mongod.sh))
   ];
 
