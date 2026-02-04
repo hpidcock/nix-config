@@ -5,9 +5,12 @@
 pkgs.mkShellNoCC {
   name = "juju-dev";
 
+  propagatedBuildInputs = [
+    pkgs.pkgsStatic.sqlite
+  ];
+
   packages = with pkgs; [
     go
-    pkgsStatic.sqlite
     pkgsStatic.musl
     pkgsStatic.gcc
     pkgsStatic.binutils
