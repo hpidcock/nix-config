@@ -14,6 +14,11 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    binfmt = {
+      emulatedSystems = [
+        "aarch64-linux"
+      ];
+    };
   };
 
   time.timeZone = "Australia/Brisbane";
@@ -63,7 +68,12 @@
     wget
     uutils-coreutils-noprefix
   ];
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+  };
+  virtualisation.docker = {
+    enable = true;
+  };
 
   users.users.hpidcock = {
     isNormalUser = true;
@@ -72,6 +82,8 @@
       "video"
       "render"
       "audio"
+      "podman"
+      "docker"
     ];
     packages = with pkgs; [ home-manager ];
     openssh.authorizedKeys.keys = [

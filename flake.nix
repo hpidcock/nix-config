@@ -15,6 +15,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mac-app-util.url = "github:hraban/mac-app-util?ref=link-contents";
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     { self, nixpkgs, ... }@inputs:
@@ -23,6 +27,7 @@
       nixosConfigurations = {
         "nixon" = import ./host/nixon { inherit self inputs; };
         "merkel" = import ./host/merkel { inherit self inputs; };
+        "e52c" = import ./host/e52c { inherit self inputs; };
       };
       darwinConfigurations = {
         "trix" = import ./host/trix { inherit self inputs; };
@@ -45,6 +50,10 @@
         juju = import ./shell/juju { inherit self inputs system; };
         rp2040 = import ./shell/rp2040 { inherit self inputs system; };
       });
+
+      "e52c-img" = import ./host/e52c/image.nix {
+        inherit self inputs;
+      };
 
     };
 }
