@@ -49,13 +49,9 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-      extraPackages = with pkgs; [
-        amdvlk
-      ];
     };
-    amdgpu.amdvlk = {
-      enable = true;
-      support32Bit.enable = true;
+    amdgpu = {
+      initrd.enable = true;
     };
   };
 }

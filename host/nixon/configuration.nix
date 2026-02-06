@@ -8,7 +8,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_16;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_18;
     loader = {
       # Use the systemd-boot EFI boot loader.
       systemd-boot.enable = true;
@@ -53,7 +53,7 @@
       enable = true;
       restart = false;
       settings.default_session.command = ''
-        ${lib.makeBinPath [ pkgs.greetd.tuigreet ]}/tuigreet \
+        ${lib.makeBinPath [ pkgs.tuigreet ]}/tuigreet \
           -r --asterisks --time --cmd sway-run
       '';
     };
@@ -69,9 +69,6 @@
     uutils-coreutils-noprefix
   ];
   virtualisation.podman = {
-    enable = true;
-  };
-  virtualisation.docker = {
     enable = true;
   };
 
