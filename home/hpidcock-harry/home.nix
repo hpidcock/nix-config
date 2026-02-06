@@ -39,10 +39,9 @@
     pkgs.pinentry-rofi
     pkgs.difftastic
     pkgs.ripgrep
-    pkgs.ollama
+    pkgs.ollama-vulkan
     pkgs.mpv
 
-    pkgs.librewolf
     pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify

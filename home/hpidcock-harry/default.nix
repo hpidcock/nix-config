@@ -21,7 +21,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;
-        ollama-rocm = pkgs-unstable.ollama-rocm;
+        ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;
       })
     ];
