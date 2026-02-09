@@ -1,5 +1,4 @@
 {
-  system-manager,
   pkgs,
   ...
 }:
@@ -13,7 +12,6 @@ in
     system-graphics.enable = true;
     environment.systemPackages = [
       pkgs.vim
-      system-manager.packages.${system}.default
     ];
   };
 }
