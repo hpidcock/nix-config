@@ -3,6 +3,7 @@
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-23-11.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-fixrust.url = "github:jeafleohj/nixpkgs/fix/fetch-cargo-vendor-util";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
