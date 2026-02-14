@@ -6,12 +6,6 @@ let
       allowUnfree = true;
     };
   };
-  pkgs-23-11 = import inputs.nixpkgs-23-11 {
-    system = "x86_64-linux";
-    config = {
-      allowUnfree = true;
-    };
-  };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = import inputs.nixpkgs {
@@ -21,9 +15,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
     overlays = [
       (self: super: {
-        juju-dev-shell = super.callPackage ../../pkgs/juju-dev-shell {
-          inherit pkgs-23-11 pkgs-unstable;
-        };
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;
       })
