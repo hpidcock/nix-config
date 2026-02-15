@@ -27,6 +27,7 @@
             http = {
               server_host = "0.0.0.0";
               trusted_proxies = [ "192.168.100.10" ];
+              use_x_forwarded_for = true;
             };
           };
         };
