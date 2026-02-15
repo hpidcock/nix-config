@@ -2,9 +2,9 @@
 {
   networking.nat = {
     enable = true;
+    enableIPv6 = true;
     internalInterfaces = [ "ve-+" ];
     externalInterface = "enp86s0";
-    enableIPv6 = true;
   };
 
   networking.macvlans.mv-enp86s0-host = {
@@ -19,8 +19,16 @@
     localAddress = "192.168.100.11";
     macvlans = [ "enp86s0" ];
     config = {
-      networking.interfaces.mv-enp86s0 = {
-        useDHCP = true;
+      networking = {
+        interfaces.mv-enp86s0 = {
+          useDHCP = true;
+        };
+        firewall = {
+          enable = true;
+          interfaces.ve-homeassistant = {
+            allowedTCPPorts = [ 8123 ];
+          };
+        };
       };
       services.home-assistant = {
         enable = true;
@@ -31,13 +39,12 @@
         config = {
           default_config = { };
           http = {
-            server_host = "0.0.0.0";
+            server_host = "192.168.100.11";
             trusted_proxies = [ "192.168.100.10" ];
             use_x_forwarded_for = true;
           };
         };
       };
-      networking.firewall.interfaces.ve-homeassistant.allowedTCPPorts = [ 8123 ];
       system.stateVersion = "25.11";
     };
   };
