@@ -7,33 +7,39 @@
     enableIPv6 = true;
   };
 
+  networking.macvlans.mv-enp86s0-host = {
+    interface = "enp86s0";
+    mode = "bridge";
+  };
+
   containers.homeassistant = {
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.100.10";
     localAddress = "192.168.100.11";
-
-    config =
-      { config, pkgs, ... }:
-      {
-        services.home-assistant = {
-          enable = true;
-          extraComponents = [
-            "met"
-            "esphome"
-          ];
-          config = {
-            default_config = { };
-            http = {
-              server_host = "0.0.0.0";
-              trusted_proxies = [ "192.168.100.10" ];
-              use_x_forwarded_for = true;
-            };
+    macvlans = [ "enp86s0" ];
+    config = {
+      networking.interfaces.mv-enp86s0 = {
+        useDHCP = true;
+      };
+      services.home-assistant = {
+        enable = true;
+        extraComponents = [
+          "met"
+          "esphome"
+        ];
+        config = {
+          default_config = { };
+          http = {
+            server_host = "0.0.0.0";
+            trusted_proxies = [ "192.168.100.10" ];
+            use_x_forwarded_for = true;
           };
         };
-        networking.firewall.allowedTCPPorts = [ 8123 ];
-        system.stateVersion = "25.11";
       };
+      networking.firewall.interfaces.ve-homeassistant.allowedTCPPorts = [ 8123 ];
+      system.stateVersion = "25.11";
+    };
   };
 
   services.traefik = {
