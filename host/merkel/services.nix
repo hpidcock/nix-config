@@ -23,10 +23,27 @@
         interfaces.mv-enp86s0 = {
           useDHCP = true;
         };
+        defaultGateway = {
+          interface = "mv-enp86s0";
+        };
         firewall = {
           enable = true;
           interfaces.ve-homeassistant = {
             allowedTCPPorts = [ 8123 ];
+          };
+          interfaces.mv-enp86s0 = {
+            allowedUDPPortRanges = [
+              {
+                from = 0;
+                to = 65535;
+              }
+            ];
+            allowedTCPPortRanges = [
+              {
+                from = 0;
+                to = 65535;
+              }
+            ];
           };
         };
       };
