@@ -1,12 +1,5 @@
 { pkgs, config, ... }:
 {
-  networking.nat = {
-    enable = true;
-    enableIPv6 = true;
-    internalInterfaces = [ "ve-+" ];
-    externalInterface = "enp86s0";
-  };
-
   networking.macvlans.mv-enp86s0-host = {
     interface = "enp86s0";
     mode = "bridge";
@@ -22,9 +15,6 @@
       networking = {
         interfaces.mv-enp86s0 = {
           useDHCP = true;
-        };
-        defaultGateway = {
-          interface = "mv-enp86s0";
         };
         firewall = {
           enable = true;
