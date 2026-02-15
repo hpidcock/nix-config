@@ -253,11 +253,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771134499,
-        "narHash": "sha256-OF3uPFitofI6YtgGL75k4fQvc4xM23afv9otck9GpOU=",
+        "lastModified": 1771142033,
+        "narHash": "sha256-lJDInlozJQUJ1n4ro7m7+mIHJefSX4lv9QxNhGBzqqk=",
         "ref": "refs/heads/main",
-        "rev": "3606e615bc81a5ea46392912ef2d320f60c378fe",
-        "revCount": 5,
+        "rev": "773e055e432367ec9ede067f7d63df69d3f0a529",
+        "revCount": 6,
         "type": "git",
         "url": "ssh://git@codeberg.org/hpidcock/nix-secrets.git"
       },
