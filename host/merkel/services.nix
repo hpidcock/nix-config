@@ -1,59 +1,61 @@
 { pkgs, config, ... }:
 {
-  networking.macvlans.mv-enp86s0-host = {
-    interface = "enp86s0";
-    mode = "bridge";
-  };
-
   containers.homeassistant = {
     autoStart = true;
     privateNetwork = true;
     hostAddress = "192.168.100.10";
     localAddress = "192.168.100.11";
     macvlans = [ "enp86s0" ];
-    config = {
-      networking = {
-        interfaces.mv-enp86s0 = {
-          useDHCP = true;
-        };
-        firewall = {
-          enable = true;
-          interfaces.ve-homeassistant = {
-            allowedTCPPorts = [ 8123 ];
-          };
+    config =
+      { lib, ... }:
+      {
+        networking = {
+          useDHCP = lib.mkForce true;
+          useNetworkd = lib.mkForce true;
+          useHostResolvConf = lib.mkForce false;
           interfaces.mv-enp86s0 = {
-            allowedUDPPortRanges = [
-              {
-                from = 0;
-                to = 65535;
-              }
-            ];
-            allowedTCPPortRanges = [
-              {
-                from = 0;
-                to = 65535;
-              }
-            ];
+            useDHCP = true;
+            macAddress = "c3:d2:ad:46:02:01";
+          };
+          firewall = {
+            enable = true;
+            interfaces.ve-homeassistant = {
+              allowedTCPPorts = [ 8123 ];
+            };
+            interfaces.mv-enp86s0 = {
+              allowedUDPPortRanges = [
+                {
+                  from = 0;
+                  to = 65535;
+                }
+              ];
+              allowedTCPPortRanges = [
+                {
+                  from = 0;
+                  to = 65535;
+                }
+              ];
+            };
           };
         };
-      };
-      services.home-assistant = {
-        enable = true;
-        extraComponents = [
-          "met"
-          "esphome"
-        ];
-        config = {
-          default_config = { };
-          http = {
-            server_host = "192.168.100.11";
-            trusted_proxies = [ "192.168.100.10" ];
-            use_x_forwarded_for = true;
+        services.resolved.enable = true;
+        services.home-assistant = {
+          enable = true;
+          extraComponents = [
+            "met"
+            "esphome"
+          ];
+          config = {
+            default_config = { };
+            http = {
+              server_host = "192.168.100.11";
+              trusted_proxies = [ "192.168.100.10" ];
+              use_x_forwarded_for = true;
+            };
           };
         };
+        system.stateVersion = "25.11";
       };
-      system.stateVersion = "25.11";
-    };
   };
 
   services.traefik = {

@@ -27,7 +27,11 @@
   networking = {
     useDHCP = lib.mkDefault true;
     hostName = "merkel";
-    networkmanager.enable = true;
+    dhcpcd.allowInterfaces = [ "main" ];
+    macvlans.main = {
+      interface = "enp86s0";
+      mode = "bridge";
+    };
   };
 
   services = {
