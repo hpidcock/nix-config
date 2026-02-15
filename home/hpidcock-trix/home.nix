@@ -1,8 +1,20 @@
 {
   pkgs,
+  lib,
   config,
   ...
 }:
+let
+  masApps = [
+    "1475387142" # Tailscale
+    "1569813296" # 1Password for Safari
+    "682658836" # GarageBand
+    "408981434" # iMovie
+    "409183694" # Keynote
+    "409203825" # Numbers
+    "409201541" # Pages
+  ];
+in
 {
   imports = [
     ../../desktop/alacritty.nix
@@ -17,7 +29,6 @@
   home.sessionVariables = {
     EDITOR = "vim";
     PATH = "/Users/hpidcock/go/bin:$PATH";
-    CLOUDFLARE_ENV = config.age.secrets.cloudflare.path;
   };
   home.language = {
     base = "en_AU.utf8";
@@ -33,24 +44,37 @@
     enableExtraSocket = true;
   };
 
-  home.packages = [
-    pkgs.uutils-coreutils-noprefix
-    pkgs.zsh
-    pkgs.vim
-    pkgs.git
-    pkgs.gh
-    pkgs.htop
-    pkgs.wget
-    pkgs.curl
-    pkgs.gnupg
-    #pkgs.librewolf
-    pkgs.spotify
-    pkgs.signal-desktop-bin
-    #pkgs.element-desktop
-    #pkgs.ollama
-    #pkgs.utm
-    #pkgs.esphome
+  home.packages = with pkgs; [
+    mas
+    uutils-coreutils-noprefix
+    zsh
+    vim
+    git
+    gh
+    htop
+    wget
+    curl
+    gnupg
+    spotify
+    signal-desktop-bin
+    #element-desktop
+    #ollama
+    #utm
+    #esphome
   ];
+
+  home.activation = {
+    mas = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      comm -1 -3\
+        <(${pkgs.mas}/bin/mas list | ${pkgs.gawk}/bin/awk '{print $1}' | sort)\
+        <(echo ${lib.concatStringsSep " " masApps} | tr " " "\n" | sort)\
+        | run xargs -I % -n1 ${pkgs.mas}/bin/mas install %
+      comm -2 -3\
+        <(${pkgs.mas}/bin/mas list | ${pkgs.gawk}/bin/awk '{print $1}' | sort)\
+        <(echo ${lib.concatStringsSep " " masApps} | tr " " "\n" | sort)\
+        | run xargs -I % -n1 ${pkgs.mas}/bin/mas uninstall %
+    '';
+  };
 
   programs.direnv = {
     enable = true;

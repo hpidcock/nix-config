@@ -32,7 +32,6 @@
 
   environment.systemPackages = with pkgs; [
     git
-    darwin.xcode
   ];
 
   users.users.hpidcock = {
