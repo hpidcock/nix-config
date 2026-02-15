@@ -1,11 +1,16 @@
 { lib, pkgs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ./services.nix
+  ];
 
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
   ];
+
+  age.identityPaths = [ "/etc/ssh/age" ];
 
   boot = {
     kernelPackages = pkgs.linuxPackages_6_18;

@@ -7,7 +7,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
     overlays = [ ];
   };
-  modules = [ ./home.nix ];
+  modules = [
+    inputs.nix-secrets.homeManagerModules.default
+    ./home.nix
+  ];
   extraSpecialArgs = {
     inherit inputs;
   };

@@ -6,6 +6,10 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-secrets = {
+      url = "git+ssh://git@codeberg.org/hpidcock/nix-secrets.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     system-manager = {
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";

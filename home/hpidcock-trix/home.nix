@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -9,11 +10,14 @@
     ../../desktop/zed.nix
   ];
 
+  age.identityPaths = [ "/Users/hpidcock/.ssh/age" ];
+
   home.username = "hpidcock";
   home.homeDirectory = "/Users/hpidcock";
   home.sessionVariables = {
     EDITOR = "vim";
     PATH = "/Users/hpidcock/go/bin:$PATH";
+    CLOUDFLARE_ENV = config.age.secrets.cloudflare.path;
   };
   home.language = {
     base = "en_AU.utf8";
@@ -39,14 +43,13 @@
     pkgs.wget
     pkgs.curl
     pkgs.gnupg
-    pkgs.podman
-    pkgs.librewolf
+    #pkgs.librewolf
     pkgs.spotify
     pkgs.signal-desktop-bin
-    pkgs.element-desktop
-    pkgs.ollama
-    pkgs.utm
-    pkgs.esphome
+    #pkgs.element-desktop
+    #pkgs.ollama
+    #pkgs.utm
+    #pkgs.esphome
   ];
 
   programs.direnv = {

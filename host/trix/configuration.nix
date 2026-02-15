@@ -30,7 +30,10 @@
     package = pkgs-unstable._1password-gui;
   };
 
-  environment.systemPackages = [ pkgs.git ];
+  environment.systemPackages = with pkgs; [
+    git
+    darwin.xcode
+  ];
 
   users.users.hpidcock = {
     packages = with pkgs; [

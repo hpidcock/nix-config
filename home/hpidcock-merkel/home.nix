@@ -7,6 +7,8 @@
     ../../desktop/zsh.nix
   ];
 
+  age.identityPaths = [ "/home/hpidcock/.ssh/age" ];
+
   home.username = "hpidcock";
   home.homeDirectory = "/home/hpidcock";
   home.sessionVariables = {

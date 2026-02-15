@@ -54,6 +54,11 @@
       edit_predictions = {
         mode = "subtle";
       };
+      language_models = {
+        "bedrock" = {
+          "region" = "ap-southeast-2";
+        };
+      };
       lsp = {
         "package-version-server" = {
           binary = {
