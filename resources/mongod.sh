@@ -55,7 +55,7 @@ fi
 wait || true
 
 # Run mongod via podman
-podman create --rm --name $mgoname --net=host "${PODMAN_ARGS[@]}" \
+podman create --rm --name $mgoname --net=host "${PODMAN_ARGS[@]}" --log-driver=none \
 	docker.io/mongodb/mongodb-enterprise-server:4.4.29-ubuntu2004 \
 	"${MONGOD_ARGS[@]}" &>/dev/null
 
