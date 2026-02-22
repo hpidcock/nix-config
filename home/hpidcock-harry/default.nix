@@ -23,12 +23,12 @@ inputs.home-manager.lib.homeManagerConfiguration {
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor.overrideAttrs (
           final: prev: {
-            version = "0.224.0";
+            version = "0.225.0";
             src = super.fetchFromGitHub {
               owner = "zed-industries";
               repo = "zed";
-              rev = "d7129634eed30ec5a4140686e3f2885f77c39af0";
-              hash = "sha256-as9XE0uxPW1nRqK/71Wqf7/wPigubhyZpgzC7rEgVUo=";
+              rev = "9e0c5f42a9d41a1a47f168f9dc7403b4bc8b320f";
+              hash = "sha256-JhdtzUa9s5C8CeEFH8Z3SOhR6i0JfXfceg6PPuzOqMY=";
             };
             postPatch = builtins.replaceStrings [ prev.version ] [ final.version ] prev.postPatch;
             cargoDeps =
@@ -40,7 +40,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
                     version
                     src
                     ;
-                  hash = "sha256-QWxzsCiwBWXdDXjTPKDuVH+xRzaeu5P+av+RQiMzaV4=";
+                  hash = "sha256-K1ZVlPWD+yysL17pMMYNxJxcHDGHms8XlNm8iIhXc5k=";
                   postBuild = ''
                     rm -r $out/git/*/candle-book/
                   '';
