@@ -23,9 +23,18 @@ inputs.home-manager.lib.homeManagerConfiguration {
         minikube = pkgs-unstable.minikube;
         ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;
-        sway = pkgs-unstable.sway;
-        libinput = pkgs-unstable.libinput;
-        hyprland = pkgs-unstable.hyprland;
+        libinput = super.libinput.overrideAttrs (
+          final: prev: {
+            version = "1.31.0";
+            src = super.fetchFromGitLab {
+              domain = "gitlab.freedesktop.org";
+              owner = "libinput";
+              repo = "libinput";
+              rev = final.version;
+              hash = "sha256-sDe8BxR3E5CQj/RjuFWW2XSWb8tu98dtDuBSpACYkvY=";
+            };
+          }
+        );
       })
     ];
   };
