@@ -33,6 +33,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
               rev = final.version;
               hash = "sha256-sDe8BxR3E5CQj/RjuFWW2XSWb8tu98dtDuBSpACYkvY=";
             };
+            patches = [];
           }
         );
       })
