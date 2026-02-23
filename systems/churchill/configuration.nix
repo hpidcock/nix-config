@@ -12,6 +12,7 @@ in
     system-graphics.enable = true;
     environment.systemPackages = [
       pkgs.vim
+      pkgs.home-manager
     ];
   };
 }
