@@ -23,6 +23,9 @@ inputs.home-manager.lib.homeManagerConfiguration {
         minikube = pkgs-unstable.minikube;
         ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;
+        sway = pkgs-unstable.sway;
+        libinput = pkgs-unstable.libinput;
+        hyprland = pkgs-unstable.hyprland;
       })
     ];
   };
