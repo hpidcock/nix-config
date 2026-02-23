@@ -4,8 +4,6 @@
     ../../desktop/zsh.nix
   ];
 
-  home.username = "hpidcock";
-  home.homeDirectory = lib.mkDefault "/home/hpidcock";
   home.sessionVariables = {
     EDITOR = "vim";
     PATH = "${config.home.homeDirectory}/go/bin:$PATH";
@@ -24,8 +22,6 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "Harry Pidcock";
-    settings.user.email = "harry.pidcock@canonical.com";
     signing = {
       signByDefault = true;
       key = "C80B31F3A3B03C28C9ACAFFB89E735F9C1156A58";

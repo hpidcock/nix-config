@@ -6,9 +6,12 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     nix-darwin.url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
-    nix-secrets = {
+    secrets = {
       url = "git+ssh://git@codeberg.org/hpidcock/nix-secrets.git";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    private = {
+      url = "git+ssh://git@codeberg.org/hpidcock/nix-private.git";
     };
     system-manager = {
       url = "github:numtide/system-manager";
@@ -25,29 +28,31 @@
     };
   };
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    { self, nixpkgs, private, ... }@inputs:
     {
 
       nixosConfigurations = {
-        "nixon" = import ./host/nixon { inherit self inputs; };
-        "merkel" = import ./host/merkel { inherit self inputs; };
+        "${private.sys.nixon.home.key}" = import ./host/nixon { inherit self inputs; };
+        "${private.sys.merkel.home.key}" = import ./host/merkel { inherit self inputs; };
         "e52c" = import ./host/e52c { inherit self inputs; };
       };
       darwinConfigurations = {
-        "trix" = import ./host/trix { inherit self inputs; };
+        "${private.sys.kennedy.key}" = import ./host/trix { inherit self inputs; };
       };
 
       systemConfigs = {
-        "harry" = import ./systems/harry { inherit self inputs; };
+        "${private.sys.eisenhower.key}" = import ./systems/harry { inherit self inputs; };
+        "${private.sys.churchill.key}" = import ./systems/churchill { inherit self inputs; };
       };
 
       homeConfigurations = {
-        "hpidcock@harry" = import ./home/hpidcock-harry { inherit self inputs; };
-        "hpidcock@magic-mac" = import ./home/hpidcock-magic-mac { inherit self inputs; };
-        "hpidcock@nixon" = import ./home/hpidcock-nixon { inherit self inputs; };
-        "hpidcock@trix" = import ./home/hpidcock-trix { inherit self inputs; };
-        "hpidcock@devel01" = import ./home/hpidcock-devel01 { inherit self inputs; };
-        "hpidcock@merkel" = import ./home/hpidcock-merkel { inherit self inputs; };
+        "${private.sys.eisenhower.home.key}" = import ./home/hpidcock-harry { inherit self inputs; };
+        "${private.sys.tito.home.key}" = import ./home/hpidcock-magic-mac { inherit self inputs; };
+        "${private.sys.nixon.home.key}" = import ./home/hpidcock-nixon { inherit self inputs; };
+        "${private.sys.kennedy.home.key}" = import ./home/hpidcock-trix { inherit self inputs; };
+        "${private.sys.holt.home.key}" = import ./home/hpidcock-devel01 { inherit self inputs; };
+        "${private.sys.merkel.home.key}" = import ./home/hpidcock-merkel { inherit self inputs; };
+        "${private.sys.churchill.home.key}" = import ./home/churchill { inherit self inputs; };
       };
 
       devShells = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" ] (system: {

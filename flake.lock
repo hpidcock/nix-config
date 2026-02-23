@@ -5,7 +5,7 @@
         "darwin": "darwin",
         "home-manager": "home-manager_2",
         "nixpkgs": [
-          "nix-secrets",
+          "secrets",
           "nixpkgs"
         ],
         "systems": "systems_2"
@@ -42,7 +42,7 @@
     "darwin": {
       "inputs": {
         "nixpkgs": [
-          "nix-secrets",
+          "secrets",
           "agenix",
           "nixpkgs"
         ]
@@ -182,7 +182,7 @@
     "home-manager_2": {
       "inputs": {
         "nixpkgs": [
-          "nix-secrets",
+          "secrets",
           "agenix",
           "nixpkgs"
         ]
@@ -243,27 +243,6 @@
         "ref": "nix-darwin-25.11",
         "repo": "nix-darwin",
         "type": "github"
-      }
-    },
-    "nix-secrets": {
-      "inputs": {
-        "agenix": "agenix",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1771142033,
-        "narHash": "sha256-lJDInlozJQUJ1n4ro7m7+mIHJefSX4lv9QxNhGBzqqk=",
-        "ref": "refs/heads/main",
-        "rev": "773e055e432367ec9ede067f7d63df69d3f0a529",
-        "revCount": 6,
-        "type": "git",
-        "url": "ssh://git@codeberg.org/hpidcock/nix-secrets.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://git@codeberg.org/hpidcock/nix-secrets.git"
       }
     },
     "nix-system-graphics": {
@@ -430,18 +409,55 @@
         "type": "github"
       }
     },
+    "private": {
+      "locked": {
+        "lastModified": 1771806885,
+        "narHash": "sha256-1ATOSbMC8xIM5irEG5yHj4X95ynexg/+NL+tXTeR6XE=",
+        "ref": "refs/heads/main",
+        "rev": "d22966a8d69f852d5a0577fde14d821dafd675a2",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@codeberg.org/hpidcock/nix-private.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@codeberg.org/hpidcock/nix-private.git"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
-        "nix-secrets": "nix-secrets",
         "nix-system-graphics": "nix-system-graphics",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-staging": "nixpkgs-staging",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "private": "private",
+        "secrets": "secrets",
         "system-manager": "system-manager"
+      }
+    },
+    "secrets": {
+      "inputs": {
+        "agenix": "agenix",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1771142033,
+        "narHash": "sha256-lJDInlozJQUJ1n4ro7m7+mIHJefSX4lv9QxNhGBzqqk=",
+        "ref": "refs/heads/main",
+        "rev": "773e055e432367ec9ede067f7d63df69d3f0a529",
+        "revCount": 6,
+        "type": "git",
+        "url": "ssh://git@codeberg.org/hpidcock/nix-secrets.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@codeberg.org/hpidcock/nix-secrets.git"
       }
     },
     "system-manager": {

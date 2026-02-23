@@ -20,7 +20,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       })
     ];
   };
-  modules = [ ./home.nix ];
+  modules = [
+    inputs.private.sys.nixon.home.default
+    ./home.nix
+  ];
   extraSpecialArgs = {
     inherit inputs;
   };

@@ -2,7 +2,7 @@
 inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    inputs.nix-secrets.nixosModules.default
+    inputs.secrets.nixosModules.default
     ./configuration.nix
   ];
   specialArgs = inputs;

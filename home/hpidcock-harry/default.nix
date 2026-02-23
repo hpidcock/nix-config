@@ -55,7 +55,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       })
     ];
   };
-  modules = [ ./home.nix ];
+  modules = [
+    inputs.private.sys.eisenhower.home.default
+    ./home.nix
+  ];
   extraSpecialArgs = {
     inherit inputs;
   };

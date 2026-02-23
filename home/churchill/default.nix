@@ -12,16 +12,22 @@ inputs.home-manager.lib.homeManagerConfiguration {
     system = "x86_64-linux";
     config = {
       allowUnfree = true;
+      permittedInsecurePackages = [
+        "openssl-1.1.1w"
+        "olm-3.2.16"
+      ];
     };
     overlays = [
       (self: super: {
+        swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
-        zed-editor = pkgs-unstable.zed-editor;
+        ollama-vulkan = pkgs-unstable.ollama-vulkan;
+        ollama = pkgs-unstable.ollama;
       })
     ];
   };
   modules = [
-    inputs.private.sys.holt.home.default
+    inputs.private.sys.churchill.home.default
     ./home.nix
   ];
   extraSpecialArgs = {

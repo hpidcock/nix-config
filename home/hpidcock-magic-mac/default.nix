@@ -7,6 +7,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
   };
   modules = [
+    inputs.private.sys.tito.home.default
     inputs.mac-app-util.homeManagerModules.default
     ./home.nix
   ];

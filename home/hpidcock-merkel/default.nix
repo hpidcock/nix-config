@@ -8,7 +8,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
     overlays = [ ];
   };
   modules = [
-    inputs.nix-secrets.homeManagerModules.default
+    inputs.private.sys.merkel.home.default
+    inputs.secrets.homeManagerModules.default
     ./home.nix
   ];
   extraSpecialArgs = {

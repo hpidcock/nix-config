@@ -43,8 +43,9 @@ inputs.home-manager.lib.homeManagerConfiguration {
     ];
   };
   modules = [
+    inputs.private.sys.kennedy.home.default
     inputs.mac-app-util.homeManagerModules.default
-    inputs.nix-secrets.homeManagerModules.default
+    inputs.secrets.homeManagerModules.default
     ./home.nix
   ];
   extraSpecialArgs = {
