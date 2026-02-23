@@ -9,6 +9,7 @@
     ../modules/desktop.nix
     ../modules/sway.nix
     ../modules/brave.nix
+    ../../desktop/hyprland.nix
   ];
 
   home.packages = [
