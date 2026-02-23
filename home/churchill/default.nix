@@ -34,6 +34,18 @@ inputs.home-manager.lib.homeManagerConfiguration {
               hash = "sha256-sDe8BxR3E5CQj/RjuFWW2XSWb8tu98dtDuBSpACYkvY=";
             };
             patches = [];
+            buildInputs = prev.buildInputs ++ [super.lua5_4_compat];
+          }
+        );
+        wlroots_0_19 = super.wlroots_0_19.overrideAttrs (
+          final: prev: {
+            version = "0.19.2";
+            src = super.fetchFromGitHub {
+              owner = "hpidcock";
+              repo = "wlroots";
+              rev = "patched-0.19";
+              hash = "sha256-lw1ACzE1wPAzIfbdv5Cc3NyvCdFXBM+HJtcKI7bAgyw=";
+            };
           }
         );
       })
