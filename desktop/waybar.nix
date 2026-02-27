@@ -55,11 +55,10 @@
           "sway/mode"
         ];
         modules-center = [ ];
-        modules-right = [
+        modules-right = (if config.varying.hasBattery then [ "battery" ] else [ ]) ++ [
           "clock"
           "tray"
-        ]
-        ++ (if config.varying.hasBattery then [ "battery" ] else [ ]);
+        ];
         "sway/mode" = {
           format = ''<span style="italic">{}</span>'';
         };
