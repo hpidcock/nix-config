@@ -13,11 +13,12 @@
   ];
 
   varying = {
-    fontSize = 14;
-    uiFontSize = 14;
-    cursorSize = 24;
-    waybarFontSize = 10;
-    waybarHeight = 16;
+    fontSize = 12;
+    uiFontSize = 12;
+    cursorSize = 22;
+    waybarFontSize = 9;
+    waybarHeight = 14;
+    hasBattery = true;
   };
 
   home.packages = [
