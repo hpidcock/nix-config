@@ -41,17 +41,17 @@
       };
 
       systemConfigs = {
-        "${private.sys.eisenhower.key}" = import ./systems/harry { inherit self inputs; };
+        "${private.sys.eisenhower.key}" = import ./systems/eisenhower { inherit self inputs; };
         "${private.sys.churchill.key}" = import ./systems/churchill { inherit self inputs; };
       };
 
       homeConfigurations = {
-        "${private.sys.eisenhower.home.key}" = import ./home/hpidcock-harry { inherit self inputs; };
-        "${private.sys.tito.home.key}" = import ./home/hpidcock-magic-mac { inherit self inputs; };
-        "${private.sys.nixon.home.key}" = import ./home/hpidcock-nixon { inherit self inputs; };
-        "${private.sys.kennedy.home.key}" = import ./home/hpidcock-trix { inherit self inputs; };
-        "${private.sys.holt.home.key}" = import ./home/hpidcock-devel01 { inherit self inputs; };
-        "${private.sys.merkel.home.key}" = import ./home/hpidcock-merkel { inherit self inputs; };
+        "${private.sys.eisenhower.home.key}" = import ./home/eisenhower { inherit self inputs; };
+        "${private.sys.tito.home.key}" = import ./home/tito { inherit self inputs; };
+        "${private.sys.nixon.home.key}" = import ./home/nixon { inherit self inputs; };
+        "${private.sys.kennedy.home.key}" = import ./home/kennedy { inherit self inputs; };
+        "${private.sys.holt.home.key}" = import ./home/holt { inherit self inputs; };
+        "${private.sys.merkel.home.key}" = import ./home/merkel { inherit self inputs; };
         "${private.sys.churchill.home.key}" = import ./home/churchill { inherit self inputs; };
       };
 
