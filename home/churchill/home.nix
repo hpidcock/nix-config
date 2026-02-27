@@ -16,8 +16,6 @@
     fontSize = 12;
     uiFontSize = 12;
     cursorSize = 22;
-    waybarFontSize = 9;
-    waybarHeight = 14;
     hasBattery = true;
   };
 

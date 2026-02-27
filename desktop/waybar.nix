@@ -73,7 +73,7 @@
         "battery" =
           if config.varying.hasBattery then
             {
-              "bat" = "BAT2";
+              "bat" = "BAT0";
               "interval" = 60;
               "states" = {
                 "warning" = 30;
