@@ -1,4 +1,5 @@
 {
+  config,
   ...
 }:
 {
@@ -9,7 +10,7 @@
         border: none;
         border-radius: 0;
         font-family: Noto, sans-serif;
-        font-size: 12px;
+        font-size: ${toString config.varying.waybarFontSize}px;
         min-height: 0;
       }
       window#waybar {
@@ -48,7 +49,7 @@
     settings = {
       mainBar = {
         layer = "top";
-        height = 18;
+        height = config.varying.waybarHeight;
         modules-left = [
           "sway/workspaces"
           "sway/mode"
@@ -57,7 +58,8 @@
         modules-right = [
           "clock"
           "tray"
-        ];
+        ]
+        ++ (if config.varying.hasBattery then [ "battery" ] else [ ]);
         "sway/mode" = {
           format = ''<span style="italic">{}</span>'';
         };
@@ -68,6 +70,27 @@
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
           format-alt = "{:%Y-%m-%d}";
         };
+        "battery" =
+          if config.varying.hasBattery then
+            {
+              "bat" = "BAT2";
+              "interval" = 60;
+              "states" = {
+                "warning" = 30;
+                "critical" = 15;
+              };
+              "format" = "{capacity}% {icon}";
+              "format-icons" = [
+                ""
+                ""
+                ""
+                ""
+                ""
+              ];
+              "max-length" = 25;
+            }
+          else
+            { };
       };
     };
   };

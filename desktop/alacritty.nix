@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -13,10 +14,10 @@
       general = {
         live_config_reload = true;
       };
-      font.size = 18.0;
-      font.bold.family = "BlexMono Nerd Font";
-      font.italic.family = "BlexMono Nerd Font";
-      font.normal.family = "BlexMono Nerd Font";
+      font.size = config.varying.fontSize;
+      font.bold.family = config.varying.fontFamily;
+      font.italic.family = config.varying.fontFamily;
+      font.normal.family = config.varying.fontFamily;
       cursor = {
         style = "Block";
         unfocused_hollow = true;
@@ -26,7 +27,7 @@
       scrolling.multiplier = 3;
       selection.save_to_clipboard = false;
       terminal = {
-        shell.program = "zsh";
+        shell.program = "${pkgs.zsh}/bin/zsh";
       };
       window = {
         decorations = "full";

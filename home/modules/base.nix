@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }:
 {
   imports = [
+    ../../desktop/settings.nix
     ../../desktop/zsh.nix
   ];
 

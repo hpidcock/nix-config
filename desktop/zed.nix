@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 {
@@ -19,13 +20,13 @@
       theme = "Gruvbox Light";
       vim_mode = true;
       hide_mouse = "never";
-      ui_font_size = 18.0;
-      buffer_font_size = 18.0;
+      ui_font_size = config.varying.uiFontSize;
+      buffer_font_size = config.varying.fontSize;
       buffer_font_features = {
         calt = false;
       };
       terminal = {
-        font_family = "BlexMono Nerd Font";
+        font_family = config.varying.fontFamily;
         line_height = "standard";
         shell = {
           program = "${pkgs.zsh}/bin/zsh";

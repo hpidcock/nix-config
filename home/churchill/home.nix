@@ -12,6 +12,14 @@
     ../../desktop/hyprland.nix
   ];
 
+  varying = {
+    fontSize = 14;
+    uiFontSize = 14;
+    cursorSize = 24;
+    waybarFontSize = 10;
+    waybarHeight = 16;
+  };
+
   home.packages = [
     pkgs.ollama-vulkan
 
