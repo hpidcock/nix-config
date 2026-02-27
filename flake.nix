@@ -32,12 +32,12 @@
     {
 
       nixosConfigurations = {
-        "${private.sys.nixon.home.key}" = import ./host/nixon { inherit self inputs; };
-        "${private.sys.merkel.home.key}" = import ./host/merkel { inherit self inputs; };
+        "${private.sys.nixon.home.key}" = import ./systems/nixon { inherit self inputs; };
+        "${private.sys.merkel.home.key}" = import ./systems/merkel { inherit self inputs; };
         "e52c" = import ./host/e52c { inherit self inputs; };
       };
       darwinConfigurations = {
-        "${private.sys.kennedy.key}" = import ./host/trix { inherit self inputs; };
+        "${private.sys.kennedy.key}" = import ./systems/kennedy { inherit self inputs; };
       };
 
       systemConfigs = {
