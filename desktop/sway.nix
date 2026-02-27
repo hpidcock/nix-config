@@ -39,7 +39,7 @@ in
     config = null;
     extraConfig = ''
       font pango:monospace 1
-      seat seat0 xcursor_theme macOS ${config.varying.cursorSize}
+      seat seat0 xcursor_theme macOS ${toString config.varying.cursorSize}
 
       set $mod Mod4
 
