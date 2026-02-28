@@ -8,7 +8,7 @@
     ../modules/development.nix
     ../modules/desktop.nix
     ../modules/sway.nix
-    ../modules/brave.nix
+    ../modules/ugc.nix
     ../../desktop/hyprland.nix
   ];
 
