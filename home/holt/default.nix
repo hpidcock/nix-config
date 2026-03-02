@@ -14,6 +14,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       allowUnfree = true;
     };
     overlays = [
+      (inputs.private.sys.holt.home.overlay {
+        inherit inputs;
+        inherit pkgs-unstable;
+      })
       (self: super: {
         minikube = pkgs-unstable.minikube;
         zed-editor = pkgs-unstable.zed-editor;

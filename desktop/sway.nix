@@ -133,7 +133,7 @@ in
       workspace 8 output $right $left
       workspace 9 output $right $left
       workspace 10 output $right $left
-      
+
       input type:touchpad {
         natural_scroll enabled
       }

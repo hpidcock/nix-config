@@ -15,6 +15,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
     };
 
     overlays = [
+      (inputs.private.sys.nixon.home.overlay {
+        inherit inputs;
+        inherit pkgs-unstable;
+      })
       (self: super: {
         zed-editor = pkgs-unstable.zed-editor;
       })

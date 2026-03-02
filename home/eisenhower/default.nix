@@ -18,6 +18,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       ];
     };
     overlays = [
+      (inputs.private.sys.eisenhower.home.overlay {
+        inherit inputs;
+        inherit pkgs-unstable;
+      })
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;

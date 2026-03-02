@@ -18,6 +18,10 @@ inputs.home-manager.lib.homeManagerConfiguration {
       ];
     };
     overlays = [
+      (inputs.private.sys.churchill.home.overlay {
+        inherit inputs;
+        inherit pkgs-unstable;
+      })
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
@@ -33,8 +37,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
               rev = final.version;
               hash = "sha256-sDe8BxR3E5CQj/RjuFWW2XSWb8tu98dtDuBSpACYkvY=";
             };
-            patches = [];
-            buildInputs = prev.buildInputs ++ [super.lua5_4_compat];
+            patches = [ ];
+            buildInputs = prev.buildInputs ++ [ super.lua5_4_compat ];
           }
         );
         wlroots_0_19 = super.wlroots_0_19.overrideAttrs (

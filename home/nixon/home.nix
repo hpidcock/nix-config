@@ -20,6 +20,7 @@
     pkgs._1password-gui
     pkgs.signal-desktop
     pkgs.discord
+    pkgs.sxiv
 
     pkgs.podman
   ];

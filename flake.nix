@@ -28,7 +28,12 @@
     };
   };
   outputs =
-    { self, nixpkgs, private, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      private,
+      ...
+    }@inputs:
     {
 
       nixosConfigurations = {

@@ -33,11 +33,11 @@ in
       exec-once = waybar
       exec-once = 1password --silent
       exec-once = signal-desktop --disable-screen-security --start-in-tray --enable-gpu
-      
+
       # Monitors
       monitor = DP-2, 3840x2160@144, 0x0, 1
       monitor = DP-1, 3840x2160@144, 3840x0, 1
-      
+
       # Workspaces (1-7 on DP-2, 8-10 on DP-1)
       workspace = 1, monitor:DP-2, persistent:true
       workspace = 2, monitor:DP-2, persistent:true
@@ -49,12 +49,12 @@ in
       workspace = 8, monitor:DP-1, persistent:true
       workspace = 9, monitor:DP-1, persistent:true
       workspace = 10, monitor:DP-1, persistent:true
-      
+
       # Window rules
       #windowrulev2 = float, override, class:^1password$
       #windowrulev2 = float, override, class:^swaylock$
       #windowrulev2 = float, override, class:^grim$
-      
+
       # Borders and gaps
       general {
         border_size = 0
@@ -63,7 +63,7 @@ in
         col.active_border = rgba(00000000)
         col.inactive_border = rgba(00000000)
       }
-      
+
       decoration {
         rounding = 0
         blur {
@@ -73,21 +73,21 @@ in
           enabled = false
         }
       }
-      
+
       # Animations
       animations {
         enabled = true
         animation = windows, 1, 8, default
         animation = border, 1, 8, default
       }
-      
+
       # Input
       input {
         kb_layout = us
         kb_options = grp:win_menu
         follow_mouse = 1
       }
-      
+
       # Keyboard shortcuts
       bind = SUPER, Q, killactive
       bind = SUPER, F, fullscreen
@@ -100,19 +100,19 @@ in
       bind = SUPER SHIFT, E, exec, swaynag -t warning -m 'Confirm' -B 'Yes, exit hyprland' 'hyprctl dispatch exit'
       bind = SUPER SHIFT, S, exec, grim -g "$(slurp)" -t png /dev/stdout | wl-copy -t image/png
       bind = SUPER, L, exec, 1password --lock && swaylock -c 303030 -i ${../resources/bg.jpg}
-      
+
       # Window movement
       bind = SUPER, LEFT, movewindow, l
       bind = SUPER, RIGHT, movewindow, r
       bind = SUPER, UP, movewindow, u
       bind = SUPER, DOWN, movewindow, d
-      
+
       # Focus movement
       bind = SUPER, LEFT, movefocus, l
       bind = SUPER, RIGHT, movefocus, r
       bind = SUPER, UP, movefocus, u
       bind = SUPER, DOWN, movefocus, d
-      
+
       # Workspace switching
       bind = SUPER, 1, workspace, 1
       bind = SUPER, 2, workspace, 2
@@ -124,7 +124,7 @@ in
       bind = SUPER, 8, workspace, 8
       bind = SUPER, 9, workspace, 9
       bind = SUPER, 0, workspace, 10
-      
+
       # Move window to workspace
       bind = SUPER SHIFT, 1, movetoworkspace, 1
       bind = SUPER SHIFT, 2, movetoworkspace, 2

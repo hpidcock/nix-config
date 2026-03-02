@@ -411,11 +411,11 @@
     },
     "private": {
       "locked": {
-        "lastModified": 1771806885,
-        "narHash": "sha256-1ATOSbMC8xIM5irEG5yHj4X95ynexg/+NL+tXTeR6XE=",
+        "lastModified": 1772411640,
+        "narHash": "sha256-Cafc5Tu8/fSD6MWmy4bho4O1Kysw9eW+Mthbfn3IyEM=",
         "ref": "refs/heads/main",
-        "rev": "d22966a8d69f852d5a0577fde14d821dafd675a2",
-        "revCount": 1,
+        "rev": "be1895cab8c298e9156b4a1544b9eab171cb1922",
+        "revCount": 2,
         "type": "git",
         "url": "ssh://git@codeberg.org/hpidcock/nix-private.git"
       },

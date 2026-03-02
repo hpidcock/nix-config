@@ -40,7 +40,7 @@
       type = lib.types.float;
       default = 1.0;
     };
-    
+
     hasBattery = lib.mkOption {
       type = lib.types.bool;
       default = false;
