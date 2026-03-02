@@ -33,34 +33,36 @@
     pkgs.podman
   ];
 
-  programs.ssh.package = pkgs.openssh_gssapi;
-  programs.ssh.matchBlocks = {
-    "*" = {
-      identityAgent = "\"~/.1password/agent.sock\"";
-    };
-    "github.com" = {
-      identityAgent = "\"~/.1password/agent.sock\"";
-    };
-    "i-*" = {
-      user = "jenkins";
-      extraOptions = {
-        StrictHostKeyChecking = "accept-new";
-        ProxyCommand = builtins.concatStringsSep " " [
-          "sh -c '"
-          "if [ -n \"$EC2_SSH_REGION\" ]; then"
-          "  REGIONS=\"$EC2_SSH_REGION\";"
-          "else"
-          "  REGIONS=\"us-east-1 us-west-2 ap-southeast-2\";"
-          "fi;"
-          "for region in $REGIONS; do"
-          "  IP=$(aws ec2 describe-instances --region \"$region\" --instance-ids %h --query \"Reservations[0].Instances[0].PublicIpAddress\" --output text 2>/dev/null);"
-          "  if [ -n \"$IP\" ] && [ \"$IP\" != \"None\" ]; then"
-          "    exec nc \"$IP\" %p;"
-          "  fi;"
-          "done;"
-          "echo \"Error: Could not resolve public IP for %h in any region\" >&2;"
-          "exit 1'"
-        ];
+  programs.ssh = {
+    package = pkgs.openssh_gssapi;
+    matchBlocks = {
+      "*" = {
+        identityAgent = "\"~/.1password/agent.sock\"";
+      };
+      "github.com" = {
+        identityAgent = "\"~/.1password/agent.sock\"";
+      };
+      "i-*" = {
+        user = "jenkins";
+        extraOptions = {
+          StrictHostKeyChecking = "accept-new";
+          ProxyCommand = builtins.concatStringsSep " " [
+            "sh -c '"
+            "if [ -n \"$EC2_SSH_REGION\" ]; then"
+            "  REGIONS=\"$EC2_SSH_REGION\";"
+            "else"
+            "  REGIONS=\"us-east-1 us-west-2 ap-southeast-2\";"
+            "fi;"
+            "for region in $REGIONS; do"
+            "  IP=$(aws ec2 describe-instances --region \"$region\" --instance-ids %h --query \"Reservations[0].Instances[0].PublicIpAddress\" --output text 2>/dev/null);"
+            "  if [ -n \"$IP\" ] && [ \"$IP\" != \"None\" ]; then"
+            "    exec nc \"$IP\" %p;"
+            "  fi;"
+            "done;"
+            "echo \"Error: Could not resolve public IP for %h in any region\" >&2;"
+            "exit 1'"
+          ];
+        };
       };
     };
   };
