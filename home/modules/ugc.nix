@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 let
   ublockOrigin = pkgs.fetchurl {
-    url = "https://github.com/gorhill/uBlock/releases/download/1.69.0/uBlock0_1.69.0.chromium.zip";
-    hash = "sha256-N2IadpLk4y9bgGjNB5DPAtJhu7X0QK2RONBjBAxLF5c=";
+    url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3Dcjpalhdlnbpafiamejdnhcphjbkeiagm%26installsource%3Dondemand%26uc";
+    hash = "sha256-SEHCSlmTsbAvzm+Qp1MWJIH/B5d+VFS9WSXUqI9fS08=";
     name = "cjpalhdlnbpafiamejdnhcphjbkeiagm.crx";
   };
   _1password = pkgs.fetchurl {
