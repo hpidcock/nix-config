@@ -33,6 +33,7 @@
     pkgs.podman
   ];
 
+  programs.ssh.package = pkgs.openssh_gssapi;
   programs.ssh.matchBlocks = {
     "*" = {
       identityAgent = "\"~/.1password/agent.sock\"";
