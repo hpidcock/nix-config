@@ -9,10 +9,30 @@
     ../modules/desktop.nix
     ../modules/sway.nix
     ../modules/brave.nix
-    ../../desktop/hyprland.nix
   ];
+  
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk  # fallback for other portal types
+    ];
+    configPackages = [ pkgs.sway ];
+    config = {
+      sway = {
+        default = [ "hyprland" "gtk" ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
+  };
 
   home.packages = [
+    pkgs.xdg-desktop-portal-hyprland
+    
     pkgs.ollama-vulkan
     pkgs.mpv
 

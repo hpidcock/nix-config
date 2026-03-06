@@ -35,7 +35,7 @@ in
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
-    wrapperFeatures.gtk = true;
+    #wrapperFeatures.gtk = true;
     config = null;
     extraConfig = ''
       font pango:monospace 1
