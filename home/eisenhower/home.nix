@@ -43,9 +43,11 @@
     pkgs.signal-desktop
     pkgs.element-desktop
     pkgs.nheko
-
-    pkgs.podman
   ];
+
+  programs.podman = {
+    enable = true;
+  };
 
   programs.ssh.matchBlocks = {
     "*" = {
