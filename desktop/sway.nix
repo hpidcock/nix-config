@@ -136,6 +136,8 @@ in
 
       input type:touchpad {
         natural_scroll enabled
+        click_method clickfinger
+        clickfinger_button_map lrm
       }
     '';
   };
