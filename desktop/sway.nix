@@ -23,6 +23,7 @@ in
     pkgs.waybar
     pkgs.wl-clipboard
     pkgs.wofi
+    pkgs.libinput
   ];
 
   home.pointerCursor = {
