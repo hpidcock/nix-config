@@ -29,9 +29,11 @@
     pkgs.signal-desktop
     pkgs.element-desktop
     pkgs.nheko
-
-    pkgs.podman
   ];
+  
+  services.podman = {
+    enable = true;
+  };
 
   programs.ssh = {
     package = pkgs.openssh_gssapi;

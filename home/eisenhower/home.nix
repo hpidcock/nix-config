@@ -45,7 +45,7 @@
     pkgs.nheko
   ];
 
-  programs.podman = {
+  services.podman = {
     enable = true;
   };
 
