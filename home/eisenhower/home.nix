@@ -33,7 +33,7 @@
   home.packages = [
     pkgs.xdg-desktop-portal-hyprland
     
-    pkgs.ollama-vulkan
+    pkgs.ollama-rocm
     pkgs.mpv
 
     pkgs.firefox
