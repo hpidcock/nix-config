@@ -14,6 +14,7 @@ pkgs.mkShellNoCC {
     pkgsStatic.musl
     pkgsStatic.gcc
     pkgsStatic.binutils
+    pkgs.gcc.out
     bash.out
     expect.out
     gh.out

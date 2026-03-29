@@ -25,18 +25,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
-        ollama-vulkan = pkgs-unstable.ollama-vulkan.overrideAttrs (
-          final: prev: {
-            version = "0.17.7";
-            src = super.fetchFromGitHub {
-              owner = "ollama";
-              repo = "ollama";
-              tag = "v${final.version}";
-              hash = "sha256-cAqc38NHvUo5gphq1csTyosTcpUjFcs0dzB0wreEGjs=";
-            };
-            vendorHash = "sha256-Lc1Ktdqtv2VhJQssk8K1UOimeEjVNvDWePE9WkamCos=";
-          }
-        );
+        ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;
         libinput = super.libinput.overrideAttrs (
           final: prev: {

@@ -9,7 +9,6 @@
     ../modules/desktop.nix
     ../modules/sway.nix
     ../modules/ugc.nix
-    ../../desktop/hyprland.nix
   ];
 
   varying = {
@@ -22,6 +21,7 @@
   home.packages = [
     pkgs.ollama-vulkan
 
+    pkgs.brightnessctl
     pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify
