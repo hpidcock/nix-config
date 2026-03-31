@@ -12,6 +12,7 @@
 
   boot = {
     kernelParams = [
+      "dtb=/${config.hardware.deviceTree.name}"
       "root=UUID=6754af3c-c678-4472-a4a8-820e733fbeb8"
       "rootfstype=ext4"
       "console=ttyFIQ0,1500000n8"
@@ -30,10 +31,13 @@
       "single"
     ];
     supportedFilesystems = [
+      "btrfs"
+      "reiserfs"
       "vfat"
-      "fat32"
-      "exfat"
-      "ext4"
+      "f2fs"
+      "xfs"
+      "ntfs"
+      "cifs"
     ];
     initrd = {
       includeDefaultModules = false;
@@ -46,6 +50,13 @@
       kernelModules = [
         "mmc_block"
         "ext4"
+        "rockchip_rga"
+        "rockchip_saradc"
+        "rockchip_thermal"
+        "rockchipdrm"
+        "cw2015_battery"
+        "gpio_charger"
+        "rtc_rk808"
       ];
     };
     kernelModules = [ ];
@@ -55,6 +66,8 @@
       generic-extlinux-compatible = {
         enable = true;
       };
+      systemd-boot.extraFiles.${config.hardware.deviceTree.name} =
+        "${config.hardware.deviceTree.package}/${config.hardware.deviceTree.name}";
     };
   };
 

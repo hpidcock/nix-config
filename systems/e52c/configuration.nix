@@ -8,7 +8,7 @@
   ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_17;
+    kernelPackages = pkgs.linuxPackages_latest;
     kernelPatches = [
       {
         name = "rk3588s";
@@ -52,5 +52,5 @@
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
   # DO NOT CHANGE.
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.11";
 }

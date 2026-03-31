@@ -1,7 +1,7 @@
 { inputs, ... }:
 let
   pkgsHost = import inputs.nixpkgs-unstable {
-    system = builtins.currentSystem;
+    system = "x86_64-linux";
   };
   pkgsCross = import inputs.nixpkgs-unstable {
     crossSystem = "aarch64-linux";
@@ -15,7 +15,7 @@ let
       (final: prev: {
         qemu_kvm = pkgsHost.qemu;
         lkl = pkgsHost.lkl;
-        linuxPackages_6_17 = pkgsCross.linuxPackages_6_17;
+        linuxPackages_latest = pkgsCross.linuxPackages_latest;
       })
     ];
     config = {

@@ -65,7 +65,7 @@
         rp2040 = import ./shell/rp2040 { inherit self inputs system; };
       });
 
-      "e52c-img" = import ./host/e52c/image.nix {
+      "e52c-img" = import ./systems/e52c/image.nix {
         inherit self inputs;
       };
 
