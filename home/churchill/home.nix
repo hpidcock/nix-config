@@ -30,7 +30,7 @@
     pkgs.element-desktop
     pkgs.nheko
   ];
-  
+
   services.podman = {
     enable = true;
   };

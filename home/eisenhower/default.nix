@@ -25,18 +25,19 @@ inputs.home-manager.lib.homeManagerConfiguration {
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
-        zed-editor = pkgs-unstable.zed-editor; 
+        zed-editor = pkgs-unstable.zed-editor;
         signal-desktop = super.symlinkJoin {
           name = "signal-desktop";
           paths = [ super.signal-desktop ];
           buildInputs = [ super.makeWrapper ];
           postBuild = ''
             wrapProgram $out/bin/signal-desktop --add-flag '--password-store=gnome-libsecret'
-           '';
+          '';
         };
         ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama-rocm = pkgs-unstable.ollama-rocm;
         ollama = pkgs-unstable.ollama;
+        llama-cpp-rocm = pkgs-unstable.llama-cpp-rocm;
       })
     ];
   };

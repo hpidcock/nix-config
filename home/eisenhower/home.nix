@@ -8,21 +8,24 @@
     ../modules/development.nix
     ../modules/desktop.nix
     ../modules/sway.nix
-    ../modules/brave.nix
+    ../modules/ugc.nix
   ];
-  
+
   xdg.portal = {
     enable = true;
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk  # fallback for other portal types
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk # fallback for other portal types
     ];
     configPackages = [ pkgs.sway ];
     config = {
       sway = {
-        default = [ "hyprland" "gtk" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
+        default = [
+          "wlr"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
         "org.freedesktop.impl.portal.Secret" = [
           "gnome-keyring"
         ];
@@ -32,8 +35,9 @@
 
   home.packages = [
     pkgs.xdg-desktop-portal-hyprland
-    
+
     pkgs.ollama-rocm
+    pkgs.llama-cpp-rocm
     pkgs.mpv
 
     pkgs.firefox
