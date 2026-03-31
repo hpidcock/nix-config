@@ -7,7 +7,7 @@
   home.packages = [
     pkgs.nil
     pkgs.nixd
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
   ];
   programs.zed-editor = {
     enable = true;
@@ -78,7 +78,7 @@
           };
           initialization_options = {
             formatting = {
-              command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+              command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
             };
           };
         };

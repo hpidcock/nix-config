@@ -37,11 +37,8 @@ in
     git
     gh
     spotify
-    signal-desktop-bin
-    #element-desktop
-    #ollama
-    #utm
-    #esphome
+    signal-desktop
+    openssh
   ];
 
   home.activation = {
@@ -71,31 +68,9 @@ in
   };
 
   programs.ssh = {
+    enable = true;
     matchBlocks."*" = {
-      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
-    };
-    matchBlocks."github.com" = {
-      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
-    };
-    matchBlocks."devel01.tail5183a3.ts.net" = {
-      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
-      forwardAgent = true;
-      remoteForwards = [
-        {
-          bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-          host.address = "/Users/hpidcock/.gnupg/S.gpg-agent.extra";
-        }
-      ];
-    };
-    matchBlocks."merkel.local" = {
-      identityAgent = "\"/Users/hpidcock/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock\"";
-      forwardAgent = true;
-      remoteForwards = [
-        {
-          bind.address = "/run/user/1000/gnupg/S.gpg-agent";
-          host.address = "/Users/hpidcock/.gnupg/S.gpg-agent.extra";
-        }
-      ];
+      identityFile = "~/.ssh/id_ed25519";
     };
   };
 

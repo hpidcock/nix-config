@@ -18,39 +18,11 @@ inputs.home-manager.lib.homeManagerConfiguration {
         inherit inputs;
         inherit pkgs-unstable;
       })
-      (import ./overlays/signal.nix)
+      #(import ./overlays/signal.nix)
       (import ./overlays/spotify.nix)
       (self: super: {
         inetutils = null;
-        zed-editor = super.zed-editor.overrideAttrs (
-          final: prev: {
-            version = "0.224.0";
-            src = super.fetchFromGitHub {
-              owner = "zed-industries";
-              repo = "zed";
-              rev = "d7129634eed30ec5a4140686e3f2885f77c39af0";
-              hash = "sha256-as9XE0uxPW1nRqK/71Wqf7/wPigubhyZpgzC7rEgVUo=";
-            };
-            postPatch = builtins.replaceStrings [ prev.version ] [ final.version ] prev.postPatch;
-            cargoDeps =
-              super.callPackage "${inputs.nixpkgs-staging}/pkgs/build-support/rust/fetch-cargo-vendor.nix"
-                { inherit (super) cargo; }
-                {
-                  inherit (final)
-                    pname
-                    version
-                    src
-                    ;
-                  hash = "sha256-QWxzsCiwBWXdDXjTPKDuVH+xRzaeu5P+av+RQiMzaV4=";
-                  postBuild = ''
-                    rm -r $out/git/*/candle-book/
-                  '';
-                };
-            env = prev.env // {
-              RELEASE_VERSION = final.version;
-            };
-          }
-        );
+        zed-editor = pkgs-unstable.zed-editor;
       })
     ];
   };
