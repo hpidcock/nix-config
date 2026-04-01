@@ -20,7 +20,7 @@ import shellFile {
     };
     overlays = [
       (final: prev: {
-        go = pkgs-unstable.go;
+        go = pkgs-unstable.go_1_26;
       })
     ];
   };

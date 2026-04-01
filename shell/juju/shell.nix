@@ -2,36 +2,46 @@
   pkgs,
   ...
 }:
-pkgs.mkShellNoCC {
+let
+  host = pkgs;
+  target = pkgs.pkgsStatic;
+in
+target.mkShellNoCC {
   name = "juju-dev";
 
-  propagatedBuildInputs = [
-    pkgs.pkgsStatic.sqlite
-    pkgs.pkgsStatic.gcc
+  stdenv = target.stdenv;
+
+  propagatedBuildInputs = with target; [
+    sqlite
+    gcc
   ];
 
-  packages = with pkgs; [
-    go
-    pkgsStatic.musl
-    pkgsStatic.gcc
-    pkgsStatic.binutils
-    pkgs.gcc.out
-    bash.out
-    expect.out
-    gh.out
-    gnumake.out
-    jq.out
-    shellcheck.out
-    shfmt.out
-    yq-go.out
-    pstree.out
-    vault.out
-    (pkgs.writeScriptBin "mongod" (builtins.readFile ../../resources/mongod.sh))
-  ];
+  packages =
+    (with target; [
+      musl
+      gcc
+      binutils
+      go
+    ])
+    ++ (with host; [
+      bash.out
+      expect.out
+      gh.out
+      gnumake.out
+      jq.out
+      shellcheck.out
+      shfmt.out
+      yq-go.out
+      pstree.out
+      vault.out
+      (writeScriptBin "mongod" (builtins.readFile ../../resources/mongod.sh))
+    ]);
 
   shellHook = ''
     export GOFLAGS
-    export GOFLAGS='-ldflags=-linkmode=external -ldflags=-extldflags=-static'
+    export CGO_LDFLAGS
+    export GOFLAGS='"-ldflags=-extldflags=-static -linkmode=external"'
+    export CGO_LDFLAGS="-L${target.musl}/lib"
     PTREE=$(pstree -p $PPID)
     if echo $PTREE | grep -o "direnv export"; then
       exit 0
