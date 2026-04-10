@@ -38,10 +38,10 @@ target.mkShellNoCC {
     ]);
 
   shellHook = ''
-    export GOFLAGS
+    export CGO_CFLAGS
+    export CGO_CFLAGS="-static"
     export CGO_LDFLAGS
-    export GOFLAGS='"-ldflags=-extldflags=-static -linkmode=external"'
-    export CGO_LDFLAGS="-L${target.musl}/lib"
+    export CGO_LDFLAGS="-static -L${target.sqlite.out}/lib -L${target.musl}/lib"
     PTREE=$(pstree -p $PPID)
     if echo $PTREE | grep -o "direnv export"; then
       exit 0

@@ -47,6 +47,8 @@
     pkgs.signal-desktop
     pkgs.element-desktop
     pkgs.nheko
+
+    pkgs.age
   ];
 
   services.podman = {

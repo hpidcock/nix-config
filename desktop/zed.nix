@@ -57,7 +57,7 @@
       };
       language_models = {
         "bedrock" = {
-          "region" = "us-west-2";
+          "region" = "ap-southeast-2";
         };
       };
       lsp = {
