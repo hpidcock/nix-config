@@ -25,6 +25,7 @@
       buffer_font_features = {
         calt = false;
       };
+      diff_view_style = "unified";
       terminal = {
         font_family = config.varying.fontFamily;
         line_height = "standard";
