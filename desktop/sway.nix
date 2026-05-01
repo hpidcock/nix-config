@@ -94,6 +94,18 @@ in
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'Confirm' -B 'Yes, exit sway' 'swaymsg exit'"
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
       bindsym $mod+l exec ${pkgs._1password-gui}/bin/1password --lock && ${pkgs.swaylock}/bin/swaylock -c 303030 -i ${../resources/bg.jpg}
+      bindswitch lid:on exec sh -c '${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg} && systemctl suspend'
+
+      # Brightness keys
+      bindsym XF86MonBrightnessUp exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%
+      bindsym XF86MonBrightnessDown exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
+
+      # Volume keys
+      bindsym XF86AudioRaiseVolume exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+      bindsym XF86AudioLowerVolume exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      bindsym XF86AudioMute exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bindsym XF86AudioMicMute exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+      bindsym XF86AudioPlay exec ${pkgs.playerctl}/bin/playerctl play-pause
 
       # Window Colours        border    bg        text      indicator c_border
       client.focused          #00000000 #859900AA #00000000 #00000000 #00000000
