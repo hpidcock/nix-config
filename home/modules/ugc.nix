@@ -7,7 +7,7 @@ let
   };
   _1password = pkgs.fetchurl {
     url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3Daeblfdkhhhdcdjpifhhbdiojplfjncoa%26installsource%3Dondemand%26uc";
-    hash = "sha256-k1Y+5hiWmnb6l8BIepT+MveK8QK7qQGQCZREj0+mt1w=";
+    hash = "sha256-+XBgfn9a9jMfj0K4e04EMoN70xANH1gaMwPm1R5vSLA=";
     name = "aeblfdkhhhdcdjpifhhbdiojplfjncoa.crx";
   };
 in

@@ -12,28 +12,64 @@
   ];
 
   varying = {
-    fontSize = 12;
-    uiFontSize = 12;
-    cursorSize = 22;
+    #fontSize = 12;
+    #uiFontSize = 12;
+    #cursorSize = 22;
+    #gapSize = 2;
     hasBattery = true;
   };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-gtk # fallback for other portal types
+    ];
+    configPackages = [ pkgs.sway ];
+    config = {
+      sway = {
+        default = [
+          "wlr"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
+  };
+
+  services.gnome-keyring.enable = true;
 
   home.packages = [
     pkgs.ollama-vulkan
 
     pkgs.brightnessctl
-    pkgs.firefox
     pkgs.standardnotes
     pkgs.spotify
     pkgs._1password-gui
     pkgs.signal-desktop
-    pkgs.element-desktop
-    pkgs.nheko
+    (pkgs.symlinkJoin {
+      name = "mattermost-desktop";
+      paths = [ pkgs.mattermost-desktop ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/mattermost-desktop \
+          --set XDG_CURRENT_DESKTOP GNOME
+      '';
+    })
+    (pkgs.symlinkJoin {
+      name = "element-desktop";
+      paths = [ pkgs.element-desktop ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/element-desktop \
+          --set XDG_CURRENT_DESKTOP GNOME
+      '';
+    })
   ];
-
-  services.podman = {
-    enable = true;
-  };
 
   programs.ssh = {
     package = pkgs.openssh_gssapi;
@@ -43,6 +79,10 @@
       };
       "github.com" = {
         identityAgent = "\"~/.1password/agent.sock\"";
+      };
+      "harry" = {
+        hostname = "100.79.149.100";
+        user = "hpidcock";
       };
       "i-*" = {
         user = "jenkins";

@@ -27,6 +27,35 @@ inputs.home-manager.lib.homeManagerConfiguration {
         minikube = pkgs-unstable.minikube;
         ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;
+        zed-editor = pkgs-unstable.zed-editor;
+        sway-unwrapped = pkgs-unstable.sway-unwrapped.overrideAttrs (
+          final: prev: {
+            version = "1.12-rc3";
+            src = super.fetchFromGitHub {
+              owner = "swaywm";
+              repo = "sway";
+              rev = final.version;
+              hash = "sha256-SuVEUxz/PN9kJV4GG4bW4BojY6KEoW0qf3UF93AxCDI=";
+            };
+            buildInputs = with pkgs-unstable; [
+              libGL
+              wayland
+              libxkbcommon
+              pcre2
+              json_c
+              libevdev
+              pango
+              cairo
+              self.libinput
+              gdk-pixbuf
+              librsvg
+              wayland-protocols
+              libdrm
+              (wlroots_0_20.override { enableXWayland = true; })
+              libxcb-wm
+            ];
+          }
+        );
         libinput = super.libinput.overrideAttrs (
           final: prev: {
             version = "1.31.0";
@@ -39,17 +68,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
             };
             patches = [ ];
             buildInputs = prev.buildInputs ++ [ super.lua5_4_compat ];
-          }
-        );
-        wlroots_0_19 = super.wlroots_0_19.overrideAttrs (
-          final: prev: {
-            version = "0.19.2";
-            src = super.fetchFromGitHub {
-              owner = "hpidcock";
-              repo = "wlroots";
-              rev = "patched-0.19";
-              hash = "sha256-lw1ACzE1wPAzIfbdv5Cc3NyvCdFXBM+HJtcKI7bAgyw=";
-            };
           }
         );
       })

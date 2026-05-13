@@ -41,6 +41,11 @@
       default = 1.0;
     };
 
+    gapSize = lib.mkOption {
+      type = lib.types.int;
+      default = 6;
+    };
+
     hasBattery = lib.mkOption {
       type = lib.types.bool;
       default = false;

@@ -93,8 +93,8 @@ in
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'Confirm' -B 'Yes, exit sway' 'swaymsg exit'"
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
-      bindsym $mod+l exec ${pkgs._1password-gui}/bin/1password --lock && ${pkgs.swaylock}/bin/swaylock -c 303030 -i ${../resources/bg.jpg}
-      bindswitch lid:on exec sh -c '${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg} && systemctl suspend'
+      bindsym $mod+l exec ${pkgs.swaylock}/bin/swaylock -c 303030 -i ${../resources/bg.jpg}
+      bindswitch lid:on exec ${pkgs._1password-gui}/bin/1password --lock
 
       # Brightness keys
       bindsym XF86MonBrightnessUp exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%
@@ -114,7 +114,7 @@ in
       client.urgent           #00000000 #00000000 #00000000 #00000000 #00000000
 
       # Layout and Borders
-      gaps inner 6
+      gaps inner ${toString config.varying.gapSize}
       gaps outer 0
       hide_edge_borders both
       titlebar_border_thickness 0
@@ -134,6 +134,7 @@ in
 
       output $left pos 0 0 res 3840x2160@143.963Hz
       output $right pos 3840 0 res 3840x2160@143.963Hz
+      output "eDP-1" scale 1.25
       output "*" background ${../resources/bg.jpg} fill
 
       workspace 1 output $left $right
@@ -153,5 +154,30 @@ in
         clickfinger_button_map lrm
       }
     '';
+  };
+
+  services.swayidle = {
+    enable = true;
+    timeouts = [
+      {
+        timeout = 120;
+        command = "${pkgs._1password-gui}/bin/1password --lock";
+      }
+      {
+        timeout = 300;
+        command = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
+      }
+      {
+        timeout = 360;
+        command = "${pkgs.sway}/bin/swaymsg 'output * power off'";
+        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * power on'";
+      }
+    ];
+    events = [
+      {
+        event = "before-sleep";
+        command = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
+      }
+    ];
   };
 }
