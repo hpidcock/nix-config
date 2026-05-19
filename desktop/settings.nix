@@ -50,5 +50,10 @@
       type = lib.types.bool;
       default = false;
     };
+
+    enableSwayidle = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
   };
 }

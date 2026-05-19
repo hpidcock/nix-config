@@ -27,6 +27,10 @@
         echo $packages | xargs go test "$@"
       }
       alias ggt=test_changed_packages
+      case "$USER" in
+        *@*|hpidcock) export DISPLAY_USER="🦜" ;;
+        *) export DISPLAY_USER="$USER" ;;
+      esac
     '';
     plugins = [
       {
@@ -47,7 +51,7 @@
       format = lib.concatStrings [
         "[](color_orange)"
         "$os"
-        "$username"
+        "$env_var"
         "[](bg:color_yellow fg:color_orange)"
         "$directory"
         "[](fg:color_yellow bg:color_aqua)"
@@ -80,11 +84,11 @@
           NixOS = "";
         };
       };
-      username = {
-        show_always = true;
-        style_user = "bg:color_orange fg:color_fg0";
-        style_root = "bg:color_orange fg:color_fg0";
-        format = "[ $user ]($style)";
+      username.disabled = true;
+      env_var = {
+        variable = "DISPLAY_USER";
+        style = "bg:color_orange fg:color_fg0";
+        format = "[ $env_value ]($style)";
       };
       directory = {
         style = "fg:color_fg0 bg:color_yellow";

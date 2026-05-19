@@ -6,6 +6,15 @@
 }:
 let
   sway-run = (import ./sway-run.nix { inherit pkgs lib; });
+  swaylock-cmd = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
+  swayidle-cmd = lib.concatStringsSep " " [
+    "${pkgs.swayidle}/bin/swayidle -w"
+    "timeout 120 '${pkgs._1password-gui}/bin/1password --lock'"
+    "timeout 300 '${swaylock-cmd}'"
+    "timeout 360 '${pkgs.sway}/bin/swaymsg \"output * power off\"'"
+    "resume '${pkgs.sway}/bin/swaymsg \"output * power on\"'"
+    "before-sleep '${swaylock-cmd}'"
+  ];
 in
 {
   imports = [
@@ -24,6 +33,7 @@ in
     pkgs.wl-clipboard
     pkgs.wofi
     pkgs.libinput
+    pkgs.swayosd
   ];
 
   home.pointerCursor = {
@@ -97,15 +107,15 @@ in
       bindswitch lid:on exec ${pkgs._1password-gui}/bin/1password --lock
 
       # Brightness keys
-      bindsym XF86MonBrightnessUp exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%
-      bindsym XF86MonBrightnessDown exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-
+      bindsym XF86MonBrightnessUp exec ${pkgs.swayosd}/bin/swayosd-client --brightness raise
+      bindsym XF86MonBrightnessDown exec ${pkgs.swayosd}/bin/swayosd-client --brightness lower
 
       # Volume keys
-      bindsym XF86AudioRaiseVolume exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-      bindsym XF86AudioLowerVolume exec ${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-      bindsym XF86AudioMute exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-      bindsym XF86AudioMicMute exec ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-      bindsym XF86AudioPlay exec ${pkgs.playerctl}/bin/playerctl play-pause
+      bindsym XF86AudioRaiseVolume exec ${pkgs.swayosd}/bin/swayosd-client --output-volume raise
+      bindsym XF86AudioLowerVolume exec ${pkgs.swayosd}/bin/swayosd-client --output-volume lower
+      bindsym XF86AudioMute exec ${pkgs.swayosd}/bin/swayosd-client --output-volume mute-toggle
+      bindsym XF86AudioMicMute exec ${pkgs.swayosd}/bin/swayosd-client --input-volume mute-toggle
+      bindsym XF86AudioPlay exec ${pkgs.swayosd}/bin/swayosd-client --playerctl play-pause
 
       # Window Colours        border    bg        text      indicator c_border
       client.focused          #00000000 #859900AA #00000000 #00000000 #00000000
@@ -123,6 +133,8 @@ in
       tiling_drag disable
 
       # Environment
+      exec --no-startup-id ${pkgs.swayosd}/bin/swayosd-server
+      ${lib.optionalString config.varying.enableSwayidle "exec --no-startup-id ${swayidle-cmd}"}
       exec --no-startup-id ${pkgs.mako}/bin/mako
       exec --no-startup-id ${pkgs.waybar}/bin/waybar
       exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent
@@ -156,28 +168,4 @@ in
     '';
   };
 
-  services.swayidle = {
-    enable = true;
-    timeouts = [
-      {
-        timeout = 120;
-        command = "${pkgs._1password-gui}/bin/1password --lock";
-      }
-      {
-        timeout = 300;
-        command = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
-      }
-      {
-        timeout = 360;
-        command = "${pkgs.sway}/bin/swaymsg 'output * power off'";
-        resumeCommand = "${pkgs.sway}/bin/swaymsg 'output * power on'";
-      }
-    ];
-    events = [
-      {
-        event = "before-sleep";
-        command = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
-      }
-    ];
-  };
 }
