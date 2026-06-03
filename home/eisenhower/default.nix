@@ -25,7 +25,36 @@ inputs.home-manager.lib.homeManagerConfiguration {
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         minikube = pkgs-unstable.minikube;
-        zed-editor = pkgs-unstable.zed-editor;
+        zed-editor = pkgs-unstable.zed-editor.overrideAttrs (
+          final: prev: {
+            version = "1.3.6";
+            src = pkgs-unstable.fetchFromGitHub {
+              owner = "zed-industries";
+              repo = "zed";
+              rev = "4ce18741ad2ea007cb20a1dd96d2a170d224cc01";
+              hash = "sha256-GUjKj2p1EP9Sn2eihF745JzKH2t01h7JH4HyAyiJfDI=";
+            };
+            postPatch = builtins.replaceStrings [ prev.version ] [ final.version ] prev.postPatch;
+            cargoDeps =
+              pkgs-unstable.callPackage
+                "${inputs.nixpkgs-unstable}/pkgs/build-support/rust/fetch-cargo-vendor.nix"
+                { inherit (pkgs-unstable) cargo; }
+                {
+                  inherit (final)
+                    pname
+                    version
+                    src
+                    ;
+                  hash = "sha256-OptshSughuv3ZRtM+7syxagtZSdvsUjHuYSKEHvYIWc=";
+                  postBuild = ''
+                    rm -r $out/git/*/candle-book/
+                  '';
+                };
+            env = prev.env // {
+              RELEASE_VERSION = final.version;
+            };
+          }
+        );
         signal-desktop = super.symlinkJoin {
           name = "signal-desktop";
           paths = [ super.signal-desktop ];

@@ -10,6 +10,8 @@
     ../../desktop/zsh.nix
   ];
 
+  news.display = "silent";
+
   home.sessionVariables = {
     EDITOR = "vim";
     PATH = "${config.home.homeDirectory}/go/bin:$PATH";
@@ -19,7 +21,6 @@
   };
 
   home.packages = [
-    pkgs.vim
     pkgs.htop
     pkgs.wget
     pkgs.curl
@@ -30,7 +31,8 @@
     enable = true;
     signing = {
       signByDefault = true;
-      key = "C80B31F3A3B03C28C9ACAFFB89E735F9C1156A58";
+      key = "~/.ssh/id_ed25519_sk_rk_ca-key.pub";
+      format = "ssh";
     };
     settings.url = {
       "git+ssh://git.launchpad.net/" = {
@@ -41,6 +43,14 @@
       ".envrc"
       ".direnv/"
     ];
+  };
+
+  programs.vim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [ NeoSolarized ];
+    extraConfig = ''
+      vnoremap p "_dP
+    '';
   };
 
   programs.ssh = {

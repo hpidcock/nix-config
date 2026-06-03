@@ -49,6 +49,9 @@
     pkgs.nheko
 
     pkgs.age
+    pkgs.libfido2
+    pkgs.openssh
+    pkgs.yubikey-manager
   ];
 
   services.podman = {
@@ -57,10 +60,7 @@
 
   programs.ssh.matchBlocks = {
     "*" = {
-      identityAgent = "\"~/.1password/agent.sock\"";
-    };
-    "github.com" = {
-      identityAgent = "\"~/.1password/agent.sock\"";
+      identityFile = "~/.ssh/id_ed25519";
     };
     "i-*" = {
       user = "jenkins";
