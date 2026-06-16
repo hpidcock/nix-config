@@ -22,6 +22,8 @@ target.mkShellNoCC {
       gcc
       binutils
       go
+      gopls
+      golangci-lint
     ])
     ++ (with host; [
       bash.out

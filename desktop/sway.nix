@@ -22,6 +22,33 @@ in
     ./wofi.nix
   ];
 
+  # The systemd user manager inherits a bare PAM environment that lacks nix
+  # profile paths.  Writing an environment.d(5) file is the only way to inject
+  # variables *before* any user units start, which means:
+  #   - systemd finds ~/.nix-profile/share/systemd/user/xdg-desktop-portal.service
+  #     (the nix build) instead of /usr/lib/…/xdg-desktop-portal.service (Ubuntu)
+  #   - the home-manager sway exec line can call `swaymsg` by name (it uses PATH)
+  #   - child processes spawned by sway (wofi --show drun) see XDG_DATA_DIRS
+  home.file.".config/environment.d/10-nix-path.conf".text = ''
+    PATH=${config.home.homeDirectory}/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH
+    # Explicitly include the standard system dirs so the system GSettings schemas
+    # and other resources are always found, regardless of what PAM provides in
+    # $XDG_DATA_DIRS (on Ubuntu it only reliably provides /var/lib/snapd/desktop).
+    XDG_DATA_DIRS=${config.home.homeDirectory}/.nix-profile/share:/nix/var/nix/profiles/default/share:/usr/local/share:/usr/share:$XDG_DATA_DIRS
+    NIX_XDG_DESKTOP_PORTAL_DIR=${config.home.homeDirectory}/.nix-profile/share/xdg-desktop-portal/portals
+  '';
+
+  # On non-NixOS, systemd's user unit search path does not reliably prefer
+  # $XDG_DATA_DIRS/systemd/user/ over /usr/lib/systemd/user/, so the system
+  # Ubuntu portal binaries win.  Placing the nix units directly in
+  # ~/.config/systemd/user/ gives them the highest possible priority.
+  home.file.".config/systemd/user/xdg-desktop-portal.service".source =
+    "${pkgs.xdg-desktop-portal}/share/systemd/user/xdg-desktop-portal.service";
+  home.file.".config/systemd/user/xdg-desktop-portal-gtk.service".source =
+    "${pkgs.xdg-desktop-portal-gtk}/share/systemd/user/xdg-desktop-portal-gtk.service";
+  home.file.".config/systemd/user/xdg-desktop-portal-wlr.service".source =
+    "${pkgs.xdg-desktop-portal-wlr}/share/systemd/user/xdg-desktop-portal-wlr.service";
+
   home.packages = [
     sway-run
 
@@ -99,7 +126,7 @@ in
 
       # Commands
       bindsym $mod+Return exec ${pkgs.alacritty}/bin/alacritty
-      bindsym $mod+d exec ${pkgs.wofi}/bin/wofi --show run -m -4
+      bindsym $mod+d exec ${pkgs.wofi}/bin/wofi --show drun
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'Confirm' -B 'Yes, exit sway' 'swaymsg exit'"
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
@@ -136,7 +163,7 @@ in
       exec --no-startup-id ${pkgs.swayosd}/bin/swayosd-server
       ${lib.optionalString config.varying.enableSwayidle "exec --no-startup-id ${swayidle-cmd}"}
       exec --no-startup-id ${pkgs.mako}/bin/mako
-      exec --no-startup-id ${pkgs.waybar}/bin/waybar
+      exec --no-startup-id env GTK_USE_PORTAL=0 ${pkgs.waybar}/bin/waybar
       exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent
       exec --no-startup-id ${pkgs.signal-desktop}/bin/signal-desktop --disable-screen-security --start-in-tray --enable-gpu
 

@@ -2,7 +2,7 @@
 let
   ublockOrigin = pkgs.fetchurl {
     url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3Dcjpalhdlnbpafiamejdnhcphjbkeiagm%26installsource%3Dondemand%26uc";
-    hash = "sha256-FIbmYVj8cmXce7Vq4h7d2nOjmk4RkCnABmC4y5NDyGk=";
+    hash = "sha256-VJ1fsew67rnYSg2Z8pqUlMtqYKjNA8Lmk6s5vqMyPBw=";
     name = "cjpalhdlnbpafiamejdnhcphjbkeiagm.crx";
   };
   _1password = pkgs.fetchurl {
@@ -19,13 +19,13 @@ in
       {
         id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
         crxPath = ublockOrigin;
-        version = "1.70.0";
+        version = "1.71.0";
         updateUrl = "";
       }
       {
         id = "aeblfdkhhhdcdjpifhhbdiojplfjncoa";
         crxPath = _1password;
-        version = "8.12.8.26";
+        version = "8.12.22.17";
         updateUrl = "";
       }
     ];
