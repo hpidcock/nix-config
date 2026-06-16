@@ -39,7 +39,6 @@
       nixosConfigurations = {
         "${private.sys.nixon.home.key}" = import ./systems/nixon { inherit self inputs; };
         "${private.sys.merkel.home.key}" = import ./systems/merkel { inherit self inputs; };
-        "e52c" = import ./host/e52c { inherit self inputs; };
       };
       darwinConfigurations = {
         "${private.sys.kennedy.key}" = import ./systems/kennedy { inherit self inputs; };
@@ -64,10 +63,6 @@
         juju = import ./shell/juju { inherit self inputs system; };
         rp2040 = import ./shell/rp2040 { inherit self inputs system; };
       });
-
-      "e52c-img" = import ./systems/e52c/image.nix {
-        inherit self inputs;
-      };
 
     };
 }

@@ -13,7 +13,7 @@
   age.identityPaths = [ "/etc/ssh/age" ];
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_6_18;
+    kernelPackages = pkgs.linuxPackages_7_0;
     loader = {
       # Use the systemd-boot EFI boot loader.
       systemd-boot.enable = true;
