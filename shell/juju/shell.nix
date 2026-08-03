@@ -6,20 +6,18 @@ let
   host = pkgs;
   target = pkgs.pkgsStatic;
 in
-target.mkShellNoCC {
+target.mkShell {
   name = "juju-dev";
 
   stdenv = target.stdenv;
 
   propagatedBuildInputs = with target; [
     sqlite
-    gcc
   ];
 
   packages =
     (with target; [
       musl
-      gcc
       binutils
       go
       gopls
@@ -44,6 +42,7 @@ target.mkShellNoCC {
     export CGO_CFLAGS="-static"
     export CGO_LDFLAGS
     export CGO_LDFLAGS="-static -L${target.sqlite.out}/lib -L${target.musl}/lib"
+    export REALGCC="${target.gcc.out}/bin/gcc"
     PTREE=$(pstree -p $PPID)
     if echo $PTREE | grep -o "direnv export"; then
       exit 0

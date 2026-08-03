@@ -95,6 +95,11 @@ let
         path = "bin/element-desktop";
         sandbox = "electron";
       };
+      filen-desktop = patchSandbox {
+        pkg = prev.filen-desktop;
+        path = "bin/filen-desktop";
+        sandbox = "electron";
+      };
       _1password-gui = prev._1password-gui.overrideAttrs {
         postInstall = ''
           rm $out/share/1password/chrome-sandbox
@@ -148,6 +153,8 @@ in
     pkgs._1password-gui
     pkgs.signal-desktop
     pkgs.element-desktop
+    pkgs.filen-desktop
+    pkgs.filen-cli
 
     pkgs.age
     pkgs.libfido2
