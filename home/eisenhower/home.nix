@@ -159,6 +159,9 @@ in
     pkgs.age
     pkgs.libfido2
     pkgs.yubikey-manager
+    
+    pkgs.bambu-studio
+    pkgs.freecad
   ];
 
   services.podman = {

@@ -13,7 +13,6 @@
     pkgs.podman-compose
     pkgs.skopeo
     pkgs.minikube
-    pkgs.kubectl
 
     pkgs.awscli2
     pkgs.google-cloud-sdk
