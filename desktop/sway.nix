@@ -124,6 +124,40 @@ in
       bindsym $mod+Shift+9 move container to workspace 9
       bindsym $mod+Shift+0 move container to workspace 10
 
+      # Second bank of workspaces (T1-T10), reached via $mod+Tab as a
+      # secondary "modifier". Tab isn't a real modifier key, so this is
+      # implemented as a mode: $mod+Tab enters it, then a number switches
+      # to (or moves a container to) workspace T1-T10 and returns to the
+      # default mode automatically.
+      mode "tab" {
+        bindsym 1 workspace number 11:T1; mode "default"
+        bindsym 2 workspace number 12:T2; mode "default"
+        bindsym 3 workspace number 13:T3; mode "default"
+        bindsym 4 workspace number 14:T4; mode "default"
+        bindsym 5 workspace number 15:T5; mode "default"
+        bindsym 6 workspace number 16:T6; mode "default"
+        bindsym 7 workspace number 17:T7; mode "default"
+        bindsym 8 workspace number 18:T8; mode "default"
+        bindsym 9 workspace number 19:T9; mode "default"
+        bindsym 0 workspace number 20:T10; mode "default"
+
+        bindsym Shift+1 move container to workspace number 11:T1; mode "default"
+        bindsym Shift+2 move container to workspace number 12:T2; mode "default"
+        bindsym Shift+3 move container to workspace number 13:T3; mode "default"
+        bindsym Shift+4 move container to workspace number 14:T4; mode "default"
+        bindsym Shift+5 move container to workspace number 15:T5; mode "default"
+        bindsym Shift+6 move container to workspace number 16:T6; mode "default"
+        bindsym Shift+7 move container to workspace number 17:T7; mode "default"
+        bindsym Shift+8 move container to workspace number 18:T8; mode "default"
+        bindsym Shift+9 move container to workspace number 19:T9; mode "default"
+        bindsym Shift+0 move container to workspace number 20:T10; mode "default"
+
+        bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym $mod+Tab mode "default"
+      }
+      bindsym $mod+Tab mode "tab"
+
       # Commands
       bindsym $mod+Return exec ${pkgs.alacritty}/bin/alacritty
       bindsym $mod+d exec ${pkgs.wofi}/bin/wofi --show drun
@@ -186,6 +220,17 @@ in
       workspace 8 output $right $left
       workspace 9 output $right $left
       workspace 10 output $right $left
+
+      workspace "11:T1" output $left $right
+      workspace "12:T2" output $left $right
+      workspace "13:T3" output $left $right
+      workspace "14:T4" output $left $right
+      workspace "15:T5" output $left $right
+      workspace "16:T6" output $right $left
+      workspace "17:T7" output $right $left
+      workspace "18:T8" output $right $left
+      workspace "19:T9" output $right $left
+      workspace "20:T10" output $right $left
 
       input type:touchpad {
         natural_scroll enabled

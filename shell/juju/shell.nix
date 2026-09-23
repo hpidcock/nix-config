@@ -34,6 +34,7 @@ target.mkShell {
       yq-go.out
       pstree.out
       vault.out
+      claude-code.out
       (writeScriptBin "mongod" (builtins.readFile ../../resources/mongod.sh))
     ]);
 

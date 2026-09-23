@@ -162,6 +162,8 @@ in
     
     pkgs.bambu-studio
     pkgs.freecad
+
+    pkgs.esphome
   ];
 
   services.podman = {
@@ -199,14 +201,8 @@ in
   programs.git = {
     package = pkgs.gitFull;
     settings.url = {
-      "ssh://git@github.com/canonical" = {
-        insteadOf = "https://github.com/canonical";
-      };
-      "ssh://git@github.com/juju" = {
-        insteadOf = "https://github.com/juju";
-      };
-      "ssh://git@github.com/hpidcock" = {
-        insteadOf = "https://github.com/hpidcock";
+      "ssh://git@github.com/" = {
+        insteadOf = "https://github.com/";
       };
     };
   };
