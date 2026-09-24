@@ -10,6 +10,12 @@ let
       allowUnfree = true;
     };
   };
+  pkgs-staging = import inputs.nixpkgs-staging {
+    inherit system;
+    config = {
+      allowUnfree = true;
+    };
+  };
   shellFile = if system == "aarch64-darwin" then ./shell-darwin.nix else ./shell.nix;
 in
 import shellFile {
@@ -20,7 +26,7 @@ import shellFile {
     };
     overlays = [
       (final: prev: {
-        claude = pkgs-unstable.claude-code;
+        claude = pkgs-staging.claude-code;
         go = pkgs-unstable.go_1_26;
       })
     ];
