@@ -6,15 +6,18 @@
 }:
 let
   sway-run = (import ./sway-run.nix { inherit pkgs lib; });
+  has1password = lib.elem pkgs._1password-gui config.home.packages;
   swaylock-cmd = "${pkgs.swaylock}/bin/swaylock -f -c 303030 -i ${../resources/bg.jpg}";
-  swayidle-cmd = lib.concatStringsSep " " [
-    "${pkgs.swayidle}/bin/swayidle -w"
-    "timeout 120 '${pkgs._1password-gui}/bin/1password --lock'"
-    "timeout 300 '${swaylock-cmd}'"
-    "timeout 360 '${pkgs.sway}/bin/swaymsg \"output * power off\"'"
-    "resume '${pkgs.sway}/bin/swaymsg \"output * power on\"'"
-    "before-sleep '${swaylock-cmd}'"
-  ];
+  swayidle-cmd = lib.concatStringsSep " " (
+    [ "${pkgs.swayidle}/bin/swayidle -w" ]
+    ++ lib.optional has1password "timeout 120 '${pkgs._1password-gui}/bin/1password --lock'"
+    ++ [
+      "timeout 300 '${swaylock-cmd}'"
+      "timeout 360 '${pkgs.sway}/bin/swaymsg \"output * power off\"'"
+      "resume '${pkgs.sway}/bin/swaymsg \"output * power on\"'"
+      "before-sleep '${swaylock-cmd}'"
+    ]
+  );
 in
 {
   imports = [
@@ -241,7 +244,7 @@ in
       ${lib.optionalString config.varying.enableSwayidle "exec --no-startup-id ${swayidle-cmd}"}
       exec --no-startup-id ${pkgs.mako}/bin/mako
       exec --no-startup-id env GTK_USE_PORTAL=0 ${pkgs.waybar}/bin/waybar
-      exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent
+      ${lib.optionalString has1password "exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent"}
       exec --no-startup-id ${pkgs.signal-desktop}/bin/signal-desktop --disable-screen-security --start-in-tray --enable-gpu
 
       # Display setup
