@@ -94,6 +94,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
         onePassword = true;
       };
     }
+    inputs.ap.homeManagerModules.default
     ./home.nix
   ];
   extraSpecialArgs = {

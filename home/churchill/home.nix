@@ -43,6 +43,15 @@
 
   services.gnome-keyring.enable = true;
 
+  services.ap = {
+    enable = true;
+    sync.interval = "6h";
+    browsers = {
+      chromium = true;
+      chromeExtensionId = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab";
+    };
+  };
+
   home.packages = [
     pkgs.ollama-vulkan
 

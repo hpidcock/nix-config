@@ -2,12 +2,12 @@
 let
   ublockOrigin = pkgs.fetchurl {
     url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3Dcjpalhdlnbpafiamejdnhcphjbkeiagm%26installsource%3Dondemand%26uc";
-    hash = "sha256-VJ1fsew67rnYSg2Z8pqUlMtqYKjNA8Lmk6s5vqMyPBw=";
+    hash = "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=";
     name = "cjpalhdlnbpafiamejdnhcphjbkeiagm.crx";
   };
   _1password = pkgs.fetchurl {
     url = "https://clients2.google.com/service/update2/crx?response=redirect&acceptformat=crx2,crx3&prodversion=${lib.versions.major pkgs.ungoogled-chromium.version}&x=id%3Daeblfdkhhhdcdjpifhhbdiojplfjncoa%26installsource%3Dondemand%26uc";
-    hash = "sha256-6btg83FaHq2wlEqeypqDwQBTASpELilTAMJXjk52pks=";
+    hash = "sha256-7e2T/OoMkDKWXNknlWGRaJIhjrPFU0rYrD1Yw2ySYRc=";
     name = "aeblfdkhhhdcdjpifhhbdiojplfjncoa.crx";
   };
 in

@@ -24,6 +24,26 @@
         "type": "github"
       }
     },
+    "ap": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792028098,
+        "narHash": "sha256-JMM6cfdLZvBFhczaDmEX1xDLVdE8gJ7PMm/wwEGtbrc=",
+        "owner": "hpidcock",
+        "repo": "ap",
+        "rev": "59e006bb77be97678ad56be9b4bcf158a729fdd4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hpidcock",
+        "repo": "ap",
+        "type": "github"
+      }
+    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -445,6 +465,7 @@
     },
     "root": {
       "inputs": {
+        "ap": "ap",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nix-darwin": "nix-darwin",
