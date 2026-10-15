@@ -6,6 +6,12 @@ let
       allowUnfree = true;
     };
   };
+  pkgs-staging = import inputs.nixpkgs-staging {
+    system = "x86_64-linux";
+    config = {
+      allowUnfree = true;
+    };
+  };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = import inputs.nixpkgs {
@@ -71,11 +77,23 @@ inputs.home-manager.lib.homeManagerConfiguration {
             buildInputs = prev.buildInputs ++ [ super.lua5_4_compat ];
           }
         );
+        claude-code = pkgs-staging.claude-code;
       })
     ];
   };
   modules = [
     inputs.private.sys.churchill.home.default
+    ../modules/chromium-sandbox.nix
+    {
+      chromiumSandbox = {
+        electronApps = [
+          "signal-desktop"
+          "element-desktop"
+          "mattermost-desktop"
+        ];
+        onePassword = true;
+      };
+    }
     ./home.nix
   ];
   extraSpecialArgs = {

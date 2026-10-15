@@ -26,7 +26,7 @@ import shellFile {
     };
     overlays = [
       (final: prev: {
-        claude = pkgs-staging.claude-code;
+        claude-code = pkgs-staging.claude-code;
         go = pkgs-unstable.go_1_26;
       })
     ];

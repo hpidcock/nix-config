@@ -51,24 +51,9 @@
     pkgs.spotify
     pkgs._1password-gui
     pkgs.signal-desktop
-    (pkgs.symlinkJoin {
-      name = "mattermost-desktop";
-      paths = [ pkgs.mattermost-desktop ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/mattermost-desktop \
-          --set XDG_CURRENT_DESKTOP GNOME
-      '';
-    })
-    (pkgs.symlinkJoin {
-      name = "element-desktop";
-      paths = [ pkgs.element-desktop ];
-      nativeBuildInputs = [ pkgs.makeWrapper ];
-      postBuild = ''
-        wrapProgram $out/bin/element-desktop \
-          --set XDG_CURRENT_DESKTOP GNOME
-      '';
-    })
+    pkgs.claude-code
+    pkgs.mattermost-desktop
+    pkgs.element-desktop
   ];
 
   programs.ssh = {

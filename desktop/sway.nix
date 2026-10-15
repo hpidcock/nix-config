@@ -70,6 +70,15 @@ in
     gtk.enable = true;
   };
 
+  # xdpw defaults to slurp, which can only pick outputs. A dmenu-style chooser
+  # is given both "Monitor: ..." and "Window: ..." entries, so individual sway
+  # windows can be shared (via ext-foreign-toplevel capture).
+  xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
+    [screencast]
+    chooser_type=dmenu
+    chooser_cmd=${pkgs.wofi}/bin/wofi -d -n --prompt='Select a source to share:'
+  '';
+
   wayland.windowManager.sway = {
     enable = true;
     systemd.enable = true;
@@ -157,6 +166,40 @@ in
         bindsym $mod+Tab mode "default"
       }
       bindsym $mod+Tab mode "tab"
+
+      # Resize bindings. $mod+r enters resize mode; arrow keys (or
+      # vim-style hjkl) grow/shrink the focused container in 10px steps,
+      # Shift for 50px steps. Escape/Return/$mod+r return to default mode.
+      mode "resize" {
+        bindsym Left resize shrink width 10px
+        bindsym Down resize grow height 10px
+        bindsym Up resize shrink height 10px
+        bindsym Right resize grow width 10px
+        bindsym h resize shrink width 10px
+        bindsym j resize grow height 10px
+        bindsym k resize shrink height 10px
+        bindsym l resize grow width 10px
+
+        bindsym Shift+Left resize shrink width 50px
+        bindsym Shift+Down resize grow height 50px
+        bindsym Shift+Up resize shrink height 50px
+        bindsym Shift+Right resize grow width 50px
+        bindsym Shift+h resize shrink width 50px
+        bindsym Shift+j resize grow height 50px
+        bindsym Shift+k resize shrink height 50px
+        bindsym Shift+l resize grow width 50px
+
+        bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym $mod+r mode "default"
+      }
+      bindsym $mod+r mode "resize"
+
+      # Direct resize without entering a mode
+      bindsym $mod+Ctrl+Left resize shrink width 10px
+      bindsym $mod+Ctrl+Down resize grow height 10px
+      bindsym $mod+Ctrl+Up resize shrink height 10px
+      bindsym $mod+Ctrl+Right resize grow width 10px
 
       # Commands
       bindsym $mod+Return exec ${pkgs.alacritty}/bin/alacritty
