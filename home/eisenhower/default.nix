@@ -11,6 +11,7 @@ let
     config = {
       allowUnfree = true;
     };
+    overlays = [ (import ../../overlays/openssl-skip-afalg.nix) ];
   };
 in
 inputs.home-manager.lib.homeManagerConfiguration {

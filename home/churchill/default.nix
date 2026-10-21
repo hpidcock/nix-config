@@ -6,12 +6,6 @@ let
       allowUnfree = true;
     };
   };
-  pkgs-staging = import inputs.nixpkgs-staging {
-    system = "x86_64-linux";
-    config = {
-      allowUnfree = true;
-    };
-  };
 in
 inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = import inputs.nixpkgs {
@@ -77,7 +71,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
             buildInputs = prev.buildInputs ++ [ super.lua5_4_compat ];
           }
         );
-        claude-code = pkgs-staging.claude-code;
+        claude-code = pkgs-unstable.claude-code;
       })
     ];
   };
