@@ -91,7 +91,6 @@ inputs.home-manager.lib.homeManagerConfiguration {
           "element-desktop"
           "mattermost-desktop"
         ];
-        onePassword = true;
       };
     }
     inputs.ap.homeManagerModules.default
