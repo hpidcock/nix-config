@@ -216,6 +216,8 @@ in
       # Brightness keys
       bindsym XF86MonBrightnessUp exec ${pkgs.swayosd}/bin/swayosd-client --brightness raise
       bindsym XF86MonBrightnessDown exec ${pkgs.swayosd}/bin/swayosd-client --brightness lower
+      bindsym Shift+XF86MonBrightnessUp exec ${pkgs.sway}/bin/swaymsg "output * power on"
+      bindsym Shift+XF86MonBrightnessDown exec ${pkgs.sway}/bin/swaymsg "output * power off"
 
       # Volume keys
       bindsym XF86AudioRaiseVolume exec ${pkgs.swayosd}/bin/swayosd-client --output-volume raise

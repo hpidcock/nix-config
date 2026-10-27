@@ -42,6 +42,7 @@
     ignores = [
       ".envrc"
       ".direnv/"
+      "CLAUDE.local.md"
     ];
   };
 
