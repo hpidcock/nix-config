@@ -72,6 +72,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
           }
         );
         claude-code = pkgs-unstable.claude-code;
+        openshell = pkgs-unstable.callPackage ../../pkgs/openshell { };
+        openshell-gateway = pkgs-unstable.callPackage ../../pkgs/openshell { gateway = true; };
       })
     ];
   };

@@ -9,6 +9,7 @@
     ../modules/desktop.nix
     ../modules/sway.nix
     ../modules/ugc.nix
+    ../modules/openshell.nix
   ];
 
   varying = {
@@ -42,6 +43,12 @@
   };
 
   services.gnome-keyring.enable = true;
+
+  # Local OpenShell gateway on top of the host's rootless podman.socket.
+  services.openshell = {
+    enable = true;
+    managePodmanSocket = false;
+  };
 
   services.ap = {
     enable = true;
