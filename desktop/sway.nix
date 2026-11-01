@@ -210,6 +210,7 @@ in
       bindsym $mod+Shift+c reload
       bindsym $mod+Shift+e exec "swaynag -t warning -m 'Confirm' -B 'Yes, exit sway' 'swaymsg exit'"
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
+      bindsym $mod+Ctrl+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png ${config.home.homeDirectory}/Downloads/screenshot-$(${pkgs.coreutils}/bin/date +%Y%m%d-%H%M%S).png
       bindsym $mod+l exec ${swaylock-cmd}
       bindswitch lid:on exec ${swaylock-cmd}
 
