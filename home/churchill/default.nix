@@ -25,6 +25,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
       (self: super: {
         swaylock = super.callPackage ../../pkgs/host-sway-lock { };
         swayosd = pkgs-unstable.swayosd;
+        wayman = inputs.wayman.packages.${super.system}.default;
         minikube = pkgs-unstable.minikube;
         ollama-vulkan = pkgs-unstable.ollama-vulkan;
         ollama = pkgs-unstable.ollama;

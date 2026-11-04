@@ -17,7 +17,7 @@
       pkgs.git
     ];
     userSettings = {
-      theme = "Gruvbox Light";
+      theme = "Gruvbox Dark";
       vim_mode = true;
       hide_mouse = "never";
       ui_font_size = config.varying.uiFontSize;

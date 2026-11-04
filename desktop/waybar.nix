@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
@@ -56,8 +57,8 @@
         ];
         modules-center = [ ];
         modules-right = (if config.varying.hasBattery then [ "battery" ] else [ ]) ++ [
-          "clock"
           "tray"
+          "custom/clock"
         ];
         "sway/mode" = {
           format = ''<span style="italic">{}</span>'';
@@ -68,6 +69,11 @@
         "clock" = {
           tooltip-format = "{:%Y-%m-%d | %H:%M}";
           format-alt = "{:%Y-%m-%d}";
+        };
+        "custom/clock" = {
+          exec = "${pkgs.wayman}/bin/wayman clock status";
+          return-type = "json";
+          on-click = "${pkgs.wayman}/bin/wayman clock toggle";
         };
         "battery" =
           if config.varying.hasBattery then

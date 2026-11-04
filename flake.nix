@@ -30,6 +30,10 @@
       url = "github:hpidcock/ap";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    wayman = {
+      url = "github:hpidcock/wayman";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
   outputs =
     {

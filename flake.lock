@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792041618,
-        "narHash": "sha256-HrjM6dgMdMkZPS9sWG2zLsoX8q4vWzDPLfP6Wz7j9dY=",
+        "lastModified": 1793496074,
+        "narHash": "sha256-ghKOwGeZOTIwfcXECsYL2dN3d0NZhIULr7HULVYdPTM=",
         "owner": "hpidcock",
         "repo": "ap",
-        "rev": "7f962f5b98546ff6594067756a132d2df93dda0d",
+        "rev": "e690795d17446ddabe348f890c130a2280900430",
         "type": "github"
       },
       "original": {
@@ -476,7 +476,8 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "private": "private",
         "secrets": "secrets",
-        "system-manager": "system-manager"
+        "system-manager": "system-manager",
+        "wayman": "wayman"
       }
     },
     "secrets": {
@@ -594,6 +595,26 @@
         "owner": "jfroche",
         "ref": "system-manager",
         "repo": "userborn",
+        "type": "github"
+      }
+    },
+    "wayman": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793521823,
+        "narHash": "sha256-jdXBr0uTPH4kEsxsMSJvh6wDmtbKgRupMBvP9QyjsW8=",
+        "owner": "hpidcock",
+        "repo": "wayman",
+        "rev": "62e3e41f1386f1237fe8c480496b4f246267fed7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hpidcock",
+        "repo": "wayman",
         "type": "github"
       }
     }

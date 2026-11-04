@@ -249,6 +249,7 @@ in
       exec --no-startup-id env GTK_USE_PORTAL=0 ${pkgs.waybar}/bin/waybar
       ${lib.optionalString has1password "exec --no-startup-id ${pkgs._1password-gui}/bin/1password --silent"}
       exec --no-startup-id ${pkgs.signal-desktop}/bin/signal-desktop --disable-screen-security --start-in-tray --enable-gpu
+      exec --no-startup-id ${pkgs.wayman}/bin/wayman
 
       # Display setup
       set $left "DP-2"
