@@ -212,7 +212,10 @@ in
       bindsym $mod+shift+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png /dev/stdout | ${pkgs.wl-clipboard}/bin/wl-copy -t image/png
       bindsym $mod+Ctrl+s exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" -t png ${config.home.homeDirectory}/Downloads/screenshot-$(${pkgs.coreutils}/bin/date +%Y%m%d-%H%M%S).png
       bindsym $mod+l exec ${swaylock-cmd}
-      bindswitch lid:on exec ${swaylock-cmd}
+      # --locked so these still fire while swaylock holds the session lock.
+      # disable rather than power off, so `output * power on` won't wake it.
+      bindswitch --locked lid:on output eDP-1 disable; exec ${swaylock-cmd}
+      bindswitch --locked --reload lid:off output eDP-1 enable
 
       # Brightness keys
       bindsym XF86MonBrightnessUp exec ${pkgs.swayosd}/bin/swayosd-client --brightness raise

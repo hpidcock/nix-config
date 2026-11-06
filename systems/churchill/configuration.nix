@@ -15,5 +15,11 @@ in
       pkgs.vim
       pkgs.home-manager
     ];
+
+    # Keep running with the lid closed while on AC power.
+    environment.etc."systemd/logind.conf.d/10-lid.conf".text = ''
+      [Login]
+      HandleLidSwitchExternalPower=ignore
+    '';
   };
 }
